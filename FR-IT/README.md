@@ -52,8 +52,15 @@ AgriTree_largePYR.tif
 3. **SHRUB**
 
     1. Get CorineLandCover 2012 shapefile
-    2. Select only Shrub category (29/324)
-    3. Rasterize Shrub at 20m resolution for Pyrenees large area ni QGis
+    2. Select only Shrub category (322, 323, 324) in shapefile in QGis
+     ```
+     "code_12"  = '324' OR
+     "code_12"  = '323' OR
+     "code_12" ='322'
+     ```
+    clc12_shrub_FR.shp
+    
+    3. Rasterize Shrub at 20m resolution for Pyrenees large area in QGis
     4. Exclude cells (0) of shrub that are also TCD (crop with TCD please see)
 
 
