@@ -9,15 +9,15 @@ This repository contains workflow and R codes to compute variables for depredati
     1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
     https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015
 
-    2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif) 
-    to see how raster_base is created please refer to [STUDY AREA](#Study_area)
+    2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
+    to see how raster_base is created please refer to [STUDY AREA](#Study_area)  
     and for reducing the raster please see part I of script R TCD.R
     
-    3. *Create raster of non tcd* : 
-        From Copernicus download E30N20 raster for FADSL at 20m resolution (2015)
-        https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015
-        Create raster (crop and mask) for the large area of analysis (raster_base.tif) please see part II of script TCD.R
-        This is all trees that are non forest (urban and agricultural trees such as fruit trees)
+    3. *Create raster of non tcd* :   
+        From Copernicus download E30N20 raster for FADSL at 20m resolution (2015)  
+        https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015  
+        Create raster (crop and mask) for the large area of analysis (raster_base.tif) please see part II of script TCD.R  
+        This is all trees that are non forest (urban and agricultural trees such as fruit trees)  
         
         But there is also vineyard that are not taken into account into FADSL (from quick visualization exploration) 
         Then get CorineLandCover 2012 shapefile https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012
