@@ -27,9 +27,13 @@ This is the folder to compute variables for depredation factor analysis between 
 
     1. Get raster of FADSL at large Pyrenees and Vineyards at large Pyrenees
     2. In QGis, create raster from raster calculation with 0/1 for only FASDL(3) and vineyard (which is CLC(15))
-   
-"FASDL_maskrasterbase@1"  = 3  OR 
-"vine_maskrasterbase@1" = 1
-''
+   ```
+    "FASDL_maskrasterbase@1"  = 3  OR 
+    "vine_maskrasterbase@1" = 1
+    ```
     => It brings fruit trees and vineyards (as agricultural trees) as one raster 0/1
+    
+3. ** SHRUB **
+
+
 
