@@ -51,5 +51,9 @@ AgriTree_largePYR.tif
 
 3. **SHRUB**
 
+    1. Get CorineLandCover 2012 shapefile
+    2. Select only Shrub category ()
+    3. Rasterize Shrub at 20m resolution
+    4. Crop and mask the raster layer of shrub to the Pyrenees (large area)
 
 
