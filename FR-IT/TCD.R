@@ -1,5 +1,5 @@
 ############### %%%%%%%%%%%%%%%%%%% ##################
-
+####                  PART I                      ####
 #        CREATE TCD RASTER FOR LARGE PYRENEES     ####
 #      raster to create distance and grassland
 
@@ -47,7 +47,7 @@ projection(tcd.c.d)
 writeRaster(tcd.c.d,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/tcd_decoup_LAEA_PYRlarge.tif")
 
 ############################# %%%%%%%%%%%%%% #############################
-
+####                              PART II                             ####
 ####    CREATE RASTERS AT PYRENEES FOR NON FOREST TREES AND VINEYARDS ####
 
 ############################ %%%%%%%%%%%%%%%% ############################
@@ -125,7 +125,7 @@ writeRaster(tr.c.d,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/c
 # those 2 rasters are integrated into QGis to create only one raster 0/1 for vineyards and non forest trees (FADSL 3 agricultural trees, 4 and 5 urban trees)
 
 ############################# %%%%%%%%%%%%%% #############################
-
+####                             PART III                             ####
 ####    CREATE RASTER LAYER OF TCD PYR WITHOUT NON FOREST TREES       ####
 
 ############################ %%%%%%%%%%%%%%%% ############################
