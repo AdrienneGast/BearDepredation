@@ -1,4 +1,4 @@
-This is the folder to compute variables for depredation factor analysis between France and Italy.
+This repository contains workflow and R codes to compute variables for depredation factor analysis between France and Italy.
 
 ## STUDY AREA
 
