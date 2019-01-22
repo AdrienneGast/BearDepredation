@@ -1,3 +1,4 @@
-This is the folder of my PhD studies about Depredation on livestock by brown bears in Western Europe.
+This repository contains workflow and codes used during my PhD about Depredation on livestock by brown bears in Western Europe.
 
-##Comparison France Italy##
+ * - France-Italy Comparison [FR-IT](FR-IT)
+ 
