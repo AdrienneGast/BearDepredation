@@ -60,16 +60,6 @@ AgriTree_largePYR.tif
      ```
     clc12_shrub.shp
     
-    3. Cut the shapefile on the raster_base extent 
-    (QGis : 
-    ```
-    ogr2ogr.exe -spat 3186415.47 2039945.56 3840091.56 2535652.0 -clipsrc spat_extent "\"[fichier temporaire]\"" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/CLC12/Create Shrub/clc12_Shrub.shp" clc12_Shrub)
-    ```
-    4. Rasterize Shrub shapefile at 20m resolution for Pyrenees large area in QGis (gdal::rasterize)
-    ```
-    gdal_rasterize -a OBJECTID -l Shrub_largePYR "C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/Shrub_largePYR.shp"
-    ```
-    5. In R (please see script Shrub.R), put 0/1 as shrub non shrub
-    6. Exclude cells (put zero values) in raster layer shrub that are also TCD > 0 (crop with TCD please see script Shrub.R)
-
-
+   3. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
+   4. Cut the raster to the extent of raster_base (please see script Shrub.R)
+   5. Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
