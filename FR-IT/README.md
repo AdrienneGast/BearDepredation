@@ -13,3 +13,9 @@ This is the folder to compute variables for depredation factor analysis between 
     to see how raster_base is created please refer to [STUDY AREA](#Study_area)
     
     3. *Create raster of non tcd* : 
+
+2. **AGRICULTURAL TREES**
+''
+"FASDL_maskrasterbase@1"  = 3  OR 
+"vine_maskrasterbase@1" = 1
+''
