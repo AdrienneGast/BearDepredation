@@ -32,8 +32,8 @@ This is the folder to compute variables for depredation factor analysis between 
     "vine_maskrasterbase@1" = 1
     ```
     => It brings fruit trees and vineyards (as agricultural trees) as one raster 0/1
-    
-3. ** SHRUB **
+
+3. **SHRUB**
 
 
 
