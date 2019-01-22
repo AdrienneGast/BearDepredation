@@ -6,7 +6,7 @@ This repository contains workflow and R codes to compute variables for depredati
 ## LandCover variables computed for analysis
 
 1. **TREE COVER DENSITY**
-    1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)
+    1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
     https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015
 
     2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif) 
