@@ -10,6 +10,6 @@ This is the folder to compute variables for depredation factor analysis between 
     https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015
 
     2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif) 
-    to see how raster_base is created please refer to [STUDY AREA]
+    to see how raster_base is created please refer to [STUDY AREA](#Study_area)
     
     3. *Create raster of non tcd* : 
