@@ -72,6 +72,7 @@ AgriTree_largePYR.tif
     It is the only one raster with a lower resolution so we are going to downscale the resolution to 20x20m
     
     2. Resample at the large area of analysis (raster_base) at 20m resolution please see script Elevation.R
+    Resample with bilinear method : "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
     
 5. **ESM EUROPEAN SETTLEMENT MAP**
     1. Get Copernicus raster https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green
