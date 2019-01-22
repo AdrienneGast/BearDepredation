@@ -75,5 +75,7 @@ AgriTree_largePYR.tif
     Resample with bilinear method : "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
     
 5. **ESM EUROPEAN SETTLEMENT MAP**
-    1. Get Copernicus raster https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green
-    2. Quick visualization (parallel with TCD, roads etc)
+    1. Get Copernicus raster layers https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32
+    2. Merge raster layers
+    3. Quick visualization (with TCD, roads etc)
+    4. 
