@@ -68,3 +68,7 @@ AgriTree_largePYR.tif
 4. **ELEVATION**
     1. Get Copernicus raster for E30N20 (PYR) https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1
     2. Crop and mask at the large area of analysis (raster_base) please see script Elevation.R
+    
+5. **ESM EUROPEAN SETTLEMENT MAP**
+    1. Get Copernicus raster https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green
+    2. Quick visualization (parallel with TCD, roads etc)
