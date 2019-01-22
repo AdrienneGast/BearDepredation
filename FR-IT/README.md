@@ -66,13 +66,15 @@ AgriTree_largePYR.tif
    6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R)
 
 4. **ELEVATION**
-    1. Get Copernicus raster for E30N20 (PYR) https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1
+    1. Get Copernicus raster for E30N20 (PYR)  
+    https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1
     It is at 25x25m resolution
     
     It is the only one raster with a lower resolution so we are going to downscale the resolution to 20x20m
     
-    2. Resample at the large area of analysis (raster_base) at 20m resolution please see script Elevation.R
-    Resample with bilinear method : "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
+    2. Resample at the large area of analysis (raster_base) at 20m resolution please see script Elevation.R  
+    Resample with bilinear method :  
+    "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
     
 5. **ESM EUROPEAN SETTLEMENT MAP**
     1. Get Copernicus raster layers https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32
