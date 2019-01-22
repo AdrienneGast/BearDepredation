@@ -64,3 +64,7 @@ AgriTree_largePYR.tif
    4. Cut the raster to the extent of raster_base (please see script Shrub.R)
    5. Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
    6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R)
+
+4. **ELEVATION**
+    1. Get Copernicus raster for E30N20 (PYR) https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1
+    2. Crop and mask at the large area of analysis (raster_base) please see script Elevation.R
