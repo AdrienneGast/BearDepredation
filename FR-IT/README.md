@@ -85,6 +85,11 @@ AgriTree_largePYR.tif
     3. Quick visualization (with TCD, roads etc)
     4. 
 
+5. **ROADS**
+    1. from overpass turbo https://overpass-turbo.eu/    
+    For PYR  
+    we extract motorway, trunk, primary, secondary, tertiary, unclassified, road for highwayroads  
+               track, footway, path/(north, middle 1, middle 2, middle 3,
 
 ## Grassland LANDCOVER TYPE SPECIFICATION
 
@@ -116,7 +121,20 @@ out body;
 out skel qt;
 ```
 
-Visulization:   
-stone is not used because screen contains it,   
-rock is not used either because it is not the type of rocks we are looking for, i.e. bare rocks on top of mountains, rather than those are in forest areas
-cliff is used because it adds to screen areas.
+Visulization:     
+IN ITALY  
+
+stone is not used because screen contains it,     
+rock is not used either because it is not the type of rocks we are looking for, i.e. bare rocks on top of mountains, rather than those are in forest area  
+cliff could be used because it adds to screen areas.  
+  
+IN FRANCE  
+cliff cannot be used as it is only line material  
+rocks not used eaither  
+stone not used either  
+
+Check for overlapping the downloaded files (in order to have all the rocks) because it is heavy on mozilla so I had to cut for 3 areas (North, middle, South for the ALps and North SOuth for the Pyrenees)  
+Check overlap ALP OK  
+Check overlap PYR OK  
+
+
