@@ -87,7 +87,11 @@ AgriTree_largePYR.tif
     1. from overpass turbo https://overpass-turbo.eu/    
     For PYR  
     we extract motorway, trunk, primary, secondary, tertiary, unclassified, road for highwayroads  
-               track, footway, path/(north, middle 1, middle 2, middle 3,
+               track, footway, path/(north, middle 1, middle 2, middle 3,  
+               
+6. **WATERBODIES**
+    1. From https://overpass-turbo.eu/    
+    we extract natural = water https://wiki.openstreetmap.org/wiki/Key:natural
 
 ## Grassland LANDCOVER TYPE SPECIFICATION
 
