@@ -78,10 +78,8 @@ AgriTree_largePYR.tif
     
 5. **ESM EUROPEAN SETTLEMENT MAP**
     1. Get Copernicus raster layers https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32
-    2. Merge raster layers in QGis through rgdal :   
-     ```
-    gdal_merge.bat -a_nodata -9999 -ot Float32 -o "[fichier temporaire]" -of GTiff "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N24E36/200km_2p5m_N24E36/200km_2p5m_N24E36.TIF" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N22E34/200km_2p5m_N22E34/200km_2p5m_N22E34.TIF" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N24E34/200km_2p5m_N24E34/200km_2p5m_N24E34.TIF" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N22E32/200km_2p5m_N22E32/200km_2p5m_N22E32.TIF" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N22E36/200km_2p5m_N22E36/200km_2p5m_N22E36.TIF" "C:/Users/cazam/Desktop/OBJECTIF 2/analyses/data/copernicus/ESM settlements/b57ee1647f03804dc5f85fd244b0690982f54a89/ESM2012_Rel2017_200km_2p5m_N24E32/200km_2p5m_N24E32/200km_2p5m_N24E32.TIF"  
-     ```
+    2. Merge raster layers in ArcGIS through Mosaic to New Raster tool.  
+      
     3. Quick visualization (with TCD, roads etc)
     4. 
 
