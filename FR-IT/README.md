@@ -167,4 +167,21 @@ Check overlap PYR OK
 
 ## WHAT NEAREST NEIGHBOUR DISTANCE TO COMPUTE
 
+1. **package(raster)** **distance()**  
+https://www.rdocumentation.org/packages/raster/versions/2.8-4/topics/distance
+
+2. **package(raster)** **distanceFromPoints()
+https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints
+
+3. package(proxy) dist()  
+https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist
+
+4. **package(regos)** **gDistance()**  
+https://www.rdocumentation.org/packages/rgeos/versions/0.4-2/topics/gDistance
+
+5. **package(spdep)** **dnearneigh**
+https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh
+
+6. package(geosphere) dist2Line()
+https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line
 
