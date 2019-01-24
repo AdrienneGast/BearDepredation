@@ -202,3 +202,20 @@ https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh
 6. package(geosphere) dist2Line()
 https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line
 
+## PROPORTION
+
+1. **package(raster)** **buffer()**
+2. **package(raster)** **focal()**
+
+
+## Some notes:
+# boundaries() in package raster
+# click() in package raster Click on a map (plot) to get values
+# clump() in package raster detect patches of connected cells
+# cv() in package raster Compute the coefficient of variation (expressed as a percentage
+# density() in package raster create density plots
+
+# canProcessInMemory() in package raster
+
+Before using resample, you may want to consider using these other functions instead:
+aggregate, disaggregate, crop, extend, merge. 
