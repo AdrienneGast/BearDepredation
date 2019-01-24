@@ -40,7 +40,7 @@ TCDtrue_largePYR.tif
 2. **AGRICULTURAL TREES**
 
     1. Get raster of FADSL at large Pyrenees and Vineyards at large Pyrenees
-    2. In QGis, create raster from raster calculation with 0/1 for only FASDL(3) and vineyard (which is CLC(15))
+    2. In QGis, create raster from raster calculation with 0/1 for only FASDL(code 3 agricultural trees) and vineyard (which is CLC(15) constructed before see non tcd raster before)
    ```
     "FASDL_maskrasterbase@1"  = 3  OR 
     "vine_maskrasterbase@1" = 1
@@ -49,10 +49,10 @@ TCDtrue_largePYR.tif
 
 AgriTree_largePYR.tif
 
-3. **SHRUB**
+3. **SHRUB OR TRANSITIONAL WOODLAND-SHRUB AREA**
 
     1. Get CorineLandCover 2012 shapefile
-    2. Select only Shrub category (322, 323, 324) in shapefile in QGis
+    2. Select only Shrub category (322, 323, 324 / code for transitional areas) in shapefile in QGis
      ```
      "code_12"  = '324' OR
      "code_12"  = '323' OR
@@ -63,7 +63,7 @@ AgriTree_largePYR.tif
    3. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
    4. Cut the raster to the extent of raster_base (please see script Shrub.R)
    5. Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
-   6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R)
+   6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area.
 
 4. **ELEVATION**
     1. Get Copernicus raster for E30N20 (PYR)  
@@ -163,5 +163,8 @@ Check overlap PYR OK
 4. **Clip grassland with waterbodies or only lake raster**
 
 => Grassland_largePYR.tif
+
+
+## WHAT NEAREST NEIGHBOUR DISTANCE TO COMPUTE
 
 
