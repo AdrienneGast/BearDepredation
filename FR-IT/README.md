@@ -170,6 +170,23 @@ Check overlap PYR OK
 1. **package(raster)** **distance()**  
 https://www.rdocumentation.org/packages/raster/versions/2.8-4/topics/distance
 
+First option: Compute distance to nearest cell that is not NA (that contains the category we are interested in).  
+              We assume then that 
+              ```
+              raster[raster==0] <-  NAs 
+              ```
+              and those that are 
+              ```
+              raster[raster != 0]
+              ```
+              their distance if 0 because they are the targeted category.
+              
+This can be done for TCD, AgriTree, Shrub, ESM, Waterbodies  
+
+ESM: distance to nearest settlement will be computed at 2.5m (if possible) then resample at 20m resolution for more exactitude
+However, how do we do for roads ? do we rasterize or not?
+
+
 2. **package(raster)** **distanceFromPoints()
 https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints
 
