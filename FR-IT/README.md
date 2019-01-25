@@ -209,13 +209,13 @@ AgriTree_largePYR.tif
 => Grasslandtot_largePYR.tif
 
 2. **Bare rocks land cover**
-    1. From https://overpass-turbo.eu/   
-    we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
+        * From https://overpass-turbo.eu/   
+        we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
 
-    definition from https://wiki.openstreetmap.org/wiki/Tag%3Anatural%3Dbare_rock
-    bare_rock
-    scree  
-    glacier
+        definition from https://wiki.openstreetmap.org/wiki/Tag%3Anatural%3Dbare_rock
+        bare_rock
+        scree  
+        glacier
 
     and also extracted cliff, stone, rock to see (quick visual exploration) if it is of any importance.  
 ```
@@ -254,22 +254,22 @@ out skel qt;
    Check overlap ALP OK  
    Check overlap PYR OK  
 
-   2. Quick visualization to see each category (in QGis) so **bare_rock, screen, glacier and rock**     
+   * Quick visualization to see each category (in QGis) so **bare_rock, screen, glacier and rock**     
      If anything is missing reload from overpass turbo
      
-   3. Reprojection in LAEA (QGis::Reproject layer)
+   * Reprojection in LAEA (QGis::Reproject layer)
         * load geoJSON files in QGis
         * create a new field with "1" in it (field calculator)
         * suppress field columns (too much too heavy) from attribute table/editor 
         
-   4. Merge all the vectors into 1 raster layer 20m for large area PYRENEES (QGis::Merge vector layers)
-   5. Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
+   * Merge all the vectors into 1 raster layer 20m for large area PYRENEES (QGis::Merge vector layers)
+   * Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
 
 
 3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
-4. **Clip grassland with waterbodies or only lake raster**
+4. **Clip grassland with inland waterbodies**
 please see script 6 Grassland.R
 
 => Grasslandcut_largePYR.tif
