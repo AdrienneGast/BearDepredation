@@ -81,11 +81,13 @@ AgriTree_largePYR.tif
     https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green  
         for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32 (PYR)
         for (IT)
-    CAREFUL VERY LARGE RASTER LAEYRS!
-    2. Crop each large raster layers to the study area for both Pyrenees and Alps
-    3. Merge cropped raster layers in ArcGIS through Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
-        For PYR
-        For IT
+    CAREFUL VERY LARGE RASTER LAEYRS!  
+    
+    2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis:)
+    3. Merge cropped raster layers in ArcGIS through   
+    Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
+        For PYR => Save cropped files and merge them
+        For IT => Merge the cropped files
     4. Quick visualization (with TCD, roads etc) slection of
     Distances will be computed at 2.5m then the raster will be resampled at 20x20m.
 
@@ -119,12 +121,17 @@ AgriTree_largePYR.tif
     >;
     out skel qt;
     ```
-     2. Quick visualization to see each category. We will then categorize roads/traisl as 3 1:paved roads, 2:unpaved roads, 3:path and footways          
+     2. Quick visualization to see each category.    
+     3. Reprojection in LAEA
+        - load geoJSON files in QGis
+        - create a new field with "1" in it (field calculator)
+        - suppress field columns (too much) 
+        - dissolve all files in a row ()
      4. Merge the data with 3 categories 1:paved roads, 2:unpaved roads, 3:foot trails
      merge in QGis paths for Pyrenees
-     reprojection in LAEA
-     5. Do we rasterize? Or do we keep it as shapefiles to compute "true" distances?
-     test for rasterizing path in Pyrenees
+     
+     5. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle
+     
      
 6. **WATERBODIES AND WATERS**
     1. From Copernicus   
@@ -154,9 +161,10 @@ AgriTree_largePYR.tif
     3.  
     
     
-## Grassland LANDCOVER TYPE SPECIFICATION
+## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?)
 
-1. **Bare rocks land cover**
+1. Compute Grassland cover from Shapefile of CLC
+2. **Bare rocks land cover**
 From https://overpass-turbo.eu/   
 we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
 
