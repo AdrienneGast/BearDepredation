@@ -245,7 +245,37 @@ https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist
 
 4. **package(regos)** **gDistance()**  
 https://www.rdocumentation.org/packages/rgeos/versions/0.4-2/topics/gDistance
+ ```
+library(raster)
+m <- matrix(4,10)
+m
+mr <- raster(m)
+mr
+plot(mr)
+res(mr) <- c(0.1,0.1)
+mr[] <- 1
+plot(mr)
 
+site <- c("a","b","c","d")
+prop <- c(0.88,0.99,0.13,0.65)
+x <- c(0.1,0.45,0.8,0.7)
+y <- c(0.2,0.7,0.3,0.5)
+da <- data.frame(site,prop,x,y)
+da
+
+library(rgdal)
+library(maptools)
+coordinates(da) <- ~ x + y
+plot(da,add=T)
+
+library(rgeos)
+dd <- gDistance(da,as(mr,"SpatialPoints"),byid=T)
+dd
+mr[] <- apply(dd,1,min)
+plot(mr)
+plot(da,add=T)
+ ```  
+ 
 5. **package(spdep)** **dnearneigh**
 https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh
 
