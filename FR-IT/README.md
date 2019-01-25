@@ -264,18 +264,15 @@ out skel qt;
         
    4. Merge all the vectors into 1 raster layer 20m for large area PYRENEES (QGis::Merge vector layers)
    5. Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
-    
 
-2. **Clip grassland raster with bare rock raster (see before)**  
-Where there are bare_rock there is not grassland.  
-Tool:
 
-3. **Lakes and waterbodies raster**
-    Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable)
+3. **INLAND waterbodies raster**
+    Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
 4. **Clip grassland with waterbodies or only lake raster**
+please see script 6 Grassland.R
 
-=> Grassland_largePYR.tif
+=> Grasslandcut_largePYR.tif
 
 
 ## WHAT NEAREST NEIGHBOUR DISTANCE TO COMPUTE
