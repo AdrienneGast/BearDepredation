@@ -25,9 +25,9 @@ This repository contains workflow and R codes to compute variables for depredati
         rasterize at 20m resolution to match FADSL layer   
         then crop and mask at the Pyrenees large area of analysis (please see part II of script TCD.R)
         
-        Then in QGis, 
-        A) load both raster layers FADSL and Vineyards (20m resolution, at Pyrenees large area)
-        B) create a new raster 0/1 from the combination of those two rasters in rastor calculator (20m resolution, at Pyrenees large area, proj = +proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs)
+        Then in QGis,   
+        A) load both raster layers FADSL and Vineyards (20m resolution, at Pyrenees large area)  
+        B) create a new raster 0/1 from the combination of those two rasters in rastor calculator (20m resolution, at Pyrenees large area, proj = +proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs)  
         ```
         "FASDL_maskrasterbase@1"  = 3  OR 
         "FASDL_maskrasterbase@1"  = 4  OR 
