@@ -190,7 +190,7 @@ AgriTree_largePYR.tif
      
 ## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?)
 
-1. Compute Grassland cover from Shapefile of CLC
+1. Compute Grassland cover from Shapefile of CLC and Copernicus
  
     1. From CLC 12 shapefile :  
     Select only Grassland category (231 pastures, 321 natural grasslands, 333 semi open areas) in shapefile in QGis
@@ -199,13 +199,11 @@ AgriTree_largePYR.tif
     "code_12"  = '321' OR
     "code_12" ='333'
      ```
-    2. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)  
-    3. Cut the raster to the extent of raster_base (please see script Grassland.R)  
-    4. Put right number 0/1 for non grass/grass into the raster (please see script Grassland.R)
+    2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)  
 
-2. Add to the raster CLC12 grassland at 20m the copernicus grassland cover raster at 20m
+    3. Add to the raster CLC12 grassland at 20m the copernicus grassland cover raster at 20m
     * get copernicus grassland at 
-    * merge the 2 rasters
+    Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS**
 
 2. **Bare rocks land cover**
     1. From https://overpass-turbo.eu/   
@@ -253,16 +251,17 @@ out skel qt;
    Check overlap ALP OK  
    Check overlap PYR OK  
 
-   2. Quick visualization to see each category (in QGis).    
+   2. Quick visualization to see each category (in QGis) so **bare_rock, screen, glacier and rock**     
      If anything is missing reload from overpass turbo
      
-   3. Reprojection in LAEA
+   3. Reprojection in LAEA (QGis::Reproject layer)
         * load geoJSON files in QGis
         * create a new field with "1" in it (field calculator)
         * suppress field columns (too much too heavy) from attribute table/editor 
         
-   4. Merge the data as rocks ()
-   5. Rasterize (GRASS::v.to.rast) at 20m LAEA proj over large Pyrenees area 0/1
+   4. Merge all the vectors into 1 raster layer 20m for large area PYRENEES (QGis::Merge vector layers)
+   5. Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
+    
 
 2. **Clip grassland raster with bare rock raster (see before)**  
 Where there are bare_rock there is not grassland.  
