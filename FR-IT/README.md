@@ -125,10 +125,10 @@ AgriTree_largePYR.tif
     ```
      2. Quick visualization to see each category.    
      3. Reprojection in LAEA
-        - load geoJSON files in QGis
-        - create a new field with "1" in it (field calculator)
-        - suppress field columns (too much) 
-        - dissolve all files in a row ()
+        * load geoJSON files in QGis
+        * create a new field with "1" in it (field calculator)
+        * suppress field columns (too much) 
+        * dissolve all files in a row ()
      4. Merge the data with 3 categories 1:paved roads, 2:unpaved roads, 3:foot trails
      merge in QGis paths for Pyrenees
      
@@ -166,6 +166,19 @@ AgriTree_largePYR.tif
 ## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?)
 
 1. Compute Grassland cover from Shapefile of CLC
+ 
+    1. From CLC 12 shapefile :  
+    Select only Grassland category (231 pastures, 321 natural grasslands, 333 semi open areas) in shapefile in QGis
+     ```
+    "code_12"  = '231' OR
+    "code_12"  = '321' OR
+    "code_12" ='333'
+     ```
+    2. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
+    Cut the raster to the extent of raster_base (please see script Shrub.R)
+    Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
+    Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area.
+
 2. **Bare rocks land cover**
 From https://overpass-turbo.eu/   
 we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
