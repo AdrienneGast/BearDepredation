@@ -199,11 +199,14 @@ AgriTree_largePYR.tif
     "code_12"  = '321' OR
     "code_12" ='333'
      ```
-    2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)  
-
-    3. Add to the raster CLC12 grassland at 20m the copernicus grassland cover raster at 20m
-    * get copernicus grassland at 
-    Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS**
+    2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (GRASS::v.to.rast.value, EPSG+3035/ETRS LAEA)  
+  
+    3. Add to QGis the raster at 20m of Grassland from Copernicus     
+    https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps  
+    
+    4. Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS** (GRASS::r.patch)  
+    
+=> Grasslandtot_largePYR.tif
 
 2. **Bare rocks land cover**
     1. From https://overpass-turbo.eu/   
