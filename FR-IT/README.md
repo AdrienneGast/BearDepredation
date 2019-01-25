@@ -121,7 +121,10 @@ AgriTree_largePYR.tif
     ```
      2. Quick visualization to see each category. We will then categorize roads/traisl as 3 1:paved roads, 2:unpaved roads, 3:path and footways          
      4. Merge the data with 3 categories 1:paved roads, 2:unpaved roads, 3:foot trails
+     merge in QGis paths for Pyrenees
+     reprojection in LAEA
      5. Do we rasterize? Or do we keep it as shapefiles to compute "true" distances?
+     test for rasterizing path in Pyrenees
      
 6. **WATERBODIES AND WATERS**
     1. From Copernicus   
