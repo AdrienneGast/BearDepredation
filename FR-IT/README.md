@@ -174,10 +174,13 @@ AgriTree_largePYR.tif
     "code_12"  = '321' OR
     "code_12" ='333'
      ```
-    2. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
-    Cut the raster to the extent of raster_base (please see script Shrub.R)
-    Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
-    Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area.
+    2. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)  
+    3. Cut the raster to the extent of raster_base (please see script Grassland.R)  
+    4. Put right number 0/1 for non grass/grass into the raster (please see script Grassland.R)
+
+2. Add to the raster CLC12 grassland at 20m the copernicus grassland cover raster at 20m
+    * get copernicus grassland at 
+    * merge the 2 rasters
 
 2. **Bare rocks land cover**
 From https://overpass-turbo.eu/   
