@@ -131,7 +131,8 @@ AgriTree_largePYR.tif
         * suppress field columns (too much too heavy) from attribute table/editor 
         
      4. Merge the data into a shapefile per categories (SAGA::MergeVectorLayers)  
-     track: roads for mostly agricultural use, forest tracks etc.; usually unpaved (unsealed) but may apply to paved tracks as well, that are suitable for two-track vehicles, such as tractors or jeeps. from:https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrack
+     track: roads for mostly agricultural use, forest tracks etc.; usually unpaved (unsealed) but may apply to paved tracks as well, that are suitable for two-track vehicles, such as tractors or jeeps. from:https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrack  
+     
      path: multi-use or unspecified usage, open to all non-motorized vehicles and not intended for motorized vehicles unless tagged so separately. The path may have any type of surface. This includes walking and hiking trails, bike trails and paths, horse and stock trails, mountain bike trails as well as combinations of the above.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dpath
      footway: minor pathways which are used mainly or exclusively by pedestrians. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dfootway
      
@@ -144,13 +145,15 @@ AgriTree_largePYR.tif
      secondary: The next most important roads in a country's system. (Often link town). A highway which is not part of a major route, but nevertheless forming a link in the national route network.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dsecondary  
      tertiary: The next most important roads in a country's system. (Often link smaller towns and villages). used for roads connecting smaller settlements, and within large settlements for roads connecting local centres. In terms of the transportation network, OpenStreetMap "tertiary" roads commonly also connect minor streets to more major roads. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtertiary    
      
-     5. Merge per field  
+     5. Merge per field  (MergeVectorLayers)
                                         * 1:paved roads, == motorway, trunk, primary, secondary, tertiary, unclassified, road  
-                                        * 2:unpaved roads,  == track
+                                        * 2:unpaved roads == track
                                         * 3:foot trails, == path, footway
-     Merge in QGis ()
      
-     6. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle
+     6. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle (20x20m, LAEA) (GRASS::v.to.rast.value) for the raster_base extent.
+                                        * 1: PavedRoads
+                                        * 2: Tracks
+                                        * 3: FootTrails
      
      
 6. **WATERBODIES AND WATERS**
