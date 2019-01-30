@@ -88,10 +88,10 @@ AgriTree_largePYR.tif
     2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis::)
     3. Merge cropped raster layers in QGis through GRASS (GRASS::)   
     Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
-        For PYR => Save cropped files and merge them
-        For IT => Merge the cropped files
-    4. Quick visualization (with TCD, roads etc) slection of
-    Distances will be computed at 2.5m then the raster will be resampled at 20x20m.
+        For PYR => Save cropped files 
+        For IT => Merge the cropped files  
+WARNING: large raster files!
+    4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.
 
 5. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
