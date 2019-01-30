@@ -91,7 +91,10 @@ AgriTree_largePYR.tif
         For PYR => Save cropped files 
         For IT => Merge the cropped files  
 WARNING: large raster files!
-    4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.
+    4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.   
+    
+  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati) with the PDF file for the ESM data.
+  Normaly, we can only select for (-0, -1, -2, -10, -15, -20, -25, -30) as it is grassland, bare_rocks or water. But we need to check for the other categories.
 
 5. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
