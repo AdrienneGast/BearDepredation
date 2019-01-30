@@ -130,13 +130,14 @@ AgriTree_largePYR.tif
         * create a new field with "1" in it (field calculator)
         * suppress field columns (too much too heavy) from attribute table/editor 
         
-     4. Merge the data per field and then per categories   
+     4. Merge the data into a shapefile per categories
+     5. Merge per field  
                                         * 1:paved roads, == motorway, trunk, primary, secondary, tertiary, unclassified, road  
                                         * 2:unpaved roads,  == track
                                         * 3:foot trails, == path, footway
      Merge in QGis ()
      
-     5. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle
+     6. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle
      
      
 6. **WATERBODIES AND WATERS**
