@@ -85,8 +85,8 @@ AgriTree_largePYR.tif
         for (IT)
     CAREFUL VERY LARGE RASTER LAEYRS!  
     
-    2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis:)
-    3. Merge cropped raster layers in ArcGIS through   
+    2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis::)
+    3. Merge cropped raster layers in QGis through GRASS (GRASS::)   
     Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
         For PYR => Save cropped files and merge them
         For IT => Merge the cropped files
@@ -154,7 +154,7 @@ AgriTree_largePYR.tif
                                         * 1: PavedRoads
                                         * 2: Tracks
                                         * 3: FootTrails
-     
+Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
      
 6. **WATERBODIES AND WATERS**
     1. From Copernicus   
