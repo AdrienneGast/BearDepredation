@@ -324,13 +324,21 @@ ESM: distance to nearest settlement will be computed at 2.5m (if possible) then 
 However, how do we do for roads ? do we rasterize or not?
 
 
-2. **package(raster)** **distanceFromPoints()
+
+
+## Some notes:
+* boundaries() in package raster
+* click() in package raster Click on a map (plot) to get values
+* clump() in package raster detect patches of connected cells
+* cv() in package raster Compute the coefficient of variation (expressed as a percentage
+* density() in package raster create density plots
+* **package(raster)** **distanceFromPoints()
 https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints
 
-3. package(proxy) dist()  
+* package(proxy) dist()  
 https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist
 
-4. **package(regos)** **gDistance()**  
+* **package(regos)** **gDistance()**  
 https://www.rdocumentation.org/packages/rgeos/versions/0.4-2/topics/gDistance
  ```
 library(raster)
@@ -363,26 +371,20 @@ plot(mr)
 plot(da,add=T)
  ```  
  
-5. **package(spdep)** **dnearneigh**
+* **package(spdep)** **dnearneigh**
 https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh
 
-6. package(geosphere) dist2Line()
+* package(geosphere) dist2Line()
 https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line
 
-## PROPORTION
-
-1. **package(raster)** **buffer()**
-2. **package(raster)** **focal()**
-
-
-## Some notes:
-# boundaries() in package raster
-# click() in package raster Click on a map (plot) to get values
-# clump() in package raster detect patches of connected cells
-# cv() in package raster Compute the coefficient of variation (expressed as a percentage
-# density() in package raster create density plots
-
-# canProcessInMemory() in package raster
+* canProcessInMemory() in package raster
 
 Before using resample, you may want to consider using these other functions instead:
 aggregate, disaggregate, crop, extend, merge. 
+
+## PROPORTION
+
+* **package(raster)** **buffer()**
+* **package(raster)** **focal()**
+
+
