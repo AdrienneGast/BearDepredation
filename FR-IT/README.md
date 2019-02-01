@@ -318,7 +318,7 @@ First option: Compute distance to nearest cell that is not NA (that contains the
               ```
               their distance if 0 because they are the targeted category.
               
-This can be done for TCD, AgriTree, Shrub, ESM, Waterbodies  
+This can be done for TCD, AgriTree, Shrub, ESM, Waterbodies, Roads  
 
 ESM: distance to nearest settlement will be computed at 2.5m (if possible) then resample at 20m resolution for more exactitude
 However, how do we do for roads ? do we rasterize or not?
