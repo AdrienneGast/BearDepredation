@@ -136,16 +136,23 @@ WARNING: large raster files!
      4. Merge the data into a shapefile per categories (SAGA::MergeVectorLayers)  
      track: roads for mostly agricultural use, forest tracks etc.; usually unpaved (unsealed) but may apply to paved tracks as well, that are suitable for two-track vehicles, such as tractors or jeeps. from:https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrack  
      
-     path: multi-use or unspecified usage, open to all non-motorized vehicles and not intended for motorized vehicles unless tagged so separately. The path may have any type of surface. This includes walking and hiking trails, bike trails and paths, horse and stock trails, mountain bike trails as well as combinations of the above.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dpath
-     footway: minor pathways which are used mainly or exclusively by pedestrians. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dfootway
+     path: multi-use or unspecified usage, open to all non-motorized vehicles and not intended for motorized vehicles unless tagged so separately. The path may have any type of surface. This includes walking and hiking trails, bike trails and paths, horse and stock trails, mountain bike trails as well as combinations of the above.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dpath  
+     
+     footway: minor pathways which are used mainly or exclusively by pedestrians. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dfootway    
      
      road: tag is used for a road/way/path/street/alley/motorway/etc. with an unknown classification. https://wiki.openstreetmap.org/wiki/Tag:highway%3Droad  
-     From visualization in our area (PYR) it is only restricted to urban areas.  
-     unclassified: The least important through roads in a country's system – i.e. minor roads of a lower classification than tertiary, but which serve a purpose other than access to properties. (Often link villages and hamlets). used for minor public roads typically at the lowest level of the interconnecting grid network. Unclassified roads have lower importance in the road network than tertiary roads, and are not residential streets or agricultural tracks. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dunclassified  
-     motorway: A restricted access major divided highway, normally with 2 or more running lanes plus emergency hard shoulder. used only on ways, to identify the highest-performance roads within a territory.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway  
-     trunk: The most important roads in a country's system that aren't motorways. (Need not necessarily be a divided highway.  high performance or high importance roads that don't meet the requirement for motorway. In different countries, either performance or importance is used as the defining criterion for trunk. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrunk  
-     primary: The next most important roads in a country's system. (Often link larger towns.A major highway linking large towns, in developed countries normally with 2 lanes. In areas with worse infrastructure road quality may be far worse. The traffic for both directions is usually not separated by a central barrier.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dprimary  
+     From visualization in our area (PYR) it is only restricted to urban areas.     
+       
+     unclassified: The least important through roads in a country's system – i.e. minor roads of a lower classification than tertiary, but which serve a purpose other than access to properties. (Often link villages and hamlets). used for minor public roads typically at the lowest level of the interconnecting grid network. Unclassified roads have lower importance in the road network than tertiary roads, and are not residential streets or agricultural tracks. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dunclassified    
+       
+     motorway: A restricted access major divided highway, normally with 2 or more running lanes plus emergency hard shoulder. used only on ways, to identify the highest-performance roads within a territory.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway    
+       
+     trunk: The most important roads in a country's system that aren't motorways. (Need not necessarily be a divided highway.  high performance or high importance roads that don't meet the requirement for motorway. In different countries, either performance or importance is used as the defining criterion for trunk. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtrunk   
+     
+     primary: The next most important roads in a country's system. (Often link larger towns.A major highway linking large towns, in developed countries normally with 2 lanes. In areas with worse infrastructure road quality may be far worse. The traffic for both directions is usually not separated by a central barrier.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dprimary    
+     
      secondary: The next most important roads in a country's system. (Often link town). A highway which is not part of a major route, but nevertheless forming a link in the national route network.https://wiki.openstreetmap.org/wiki/Tag:highway%3Dsecondary  
+     
      tertiary: The next most important roads in a country's system. (Often link smaller towns and villages). used for roads connecting smaller settlements, and within large settlements for roads connecting local centres. In terms of the transportation network, OpenStreetMap "tertiary" roads commonly also connect minor streets to more major roads. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtertiary    
      
      5. Merge per field  (MergeVectorLayers)
@@ -289,7 +296,7 @@ out skel qt;
 3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
-4. **Clip grassland with inland waterbodies**
+4. **Clip grassland with inland waterbodies and bare_rock**
 please see script 6 Grassland.R
 
 => Grasslandcut_largePYR.tif
