@@ -46,3 +46,31 @@ res(shrub.c.d)
 projection(shrub.c.d)
 
 writeRaster(shrub.c.d,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Shrub_largePYR.tif")
+
+  # 4° Exclude forest TCD from the raster ----
+
+# introduce 0 in raster 1 (shrub.c.d) for all locations that are not zero in raster 2 (tcd)
+
+rst1_mod <- overlay(shrub.c.d, tcd, fun = function(x, y) {
+  x[y!=0] <- 0
+  return(x)
+})
+
+plot(rst1_mod)
+
+
+writeRaster(rst1_mod,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Shrubtrue_largePYR.tif")
+
+  # 5° Exclude Grasslandcut true from the shurb raster ----
+
+# introduce 0 in raster 1 (shrub) for all locaions that are 1 in raster 2 (grassland)
+
+shrub <- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Shrubtrue_largePYR.tif")
+grass <- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Grasslandcut_largePYR.tif")
+
+rst2 <- overlay(shrub,grass,fun = function(x, y) {
+  x[y==1] <- 0
+  return(x)
+})
+
+writeRaster(rst2,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Shrubtrue2_largePYR.tif")
