@@ -95,7 +95,7 @@ WARNING: large raster files!
     4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.   
     
   Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati) with the PDF file for the ESM data.
-  Normaly, we can only select for (-0, -1, -2, -10, -15, -20, -25, -30) as it is grassland, bare_rocks or water. But we need to check for the other categories.
+  Normaly, we can only select for (-0, -1, -2, -10, -15, -20, -25, -30) as it is grassland, bare_rocks or water. But we need to check for the other categories: with category 50 Buildings we also have some rocks that are taken...
 
 5. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
@@ -331,6 +331,23 @@ ok PavedRoads
 ok Track  
 ok Shrub  
 Distance done
+
+ * ESM:
+ 0=no data NON
+ 1=water == Waterbodies NON
+ 2=railways NON
+ 10=NBU Area-Open Space == Rocks merge (openstreetmap) ou zone de forte pente rocheuse NON
+ 15=NBU area-streets NON
+ 20=NBU Area-Green NDVI == TCD &/ou rocks NON
+ 25 = NBU Area-Street Green NDVI == trails NON
+ 30 = BU Area-Open Space == grassland NON
+ 35 = BU Area-Streets == ROADS
+ 40 = BU Area-Green NDVI
+ 41 = BU Area-Green UA
+ 45 = BU Area-Street Green NDVI == ROADS
+ 50 = BU Buildings 
+ 
+ 
 
 ## COMPUTE PROPORTION OF LANDCOVER TYPE IN BUFFER
 
