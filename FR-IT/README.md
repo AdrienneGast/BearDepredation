@@ -303,9 +303,9 @@ please see script 6 Grassland.R
 => Grasslandcut_largePYR.tif
 
 
-## WHAT NEAREST NEIGHBOUR DISTANCE TO COMPUTE
+## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
-1. **package(raster)** **distance()**  
+1. package(raster) distance()  
 https://www.rdocumentation.org/packages/raster/versions/2.8-4/topics/distance
 
 First option: Compute distance to nearest cell that is not NA (that contains the category we are interested in).  
@@ -318,26 +318,27 @@ First option: Compute distance to nearest cell that is not NA (that contains the
               raster[raster != 0]
               ```
               their distance if 0 because they are the targeted category.
-              
-This can be done for TCD, AgriTree, Shrub, ESM, Waterbodies, Roads  
-
-ESM: distance to nearest settlement will be computed at 2.5m (if possible) then resample at 20m resolution for more exactitude
-However, how do we do for roads ? do we rasterize or not?
 
 2. **Proximity (distance raster) QGis**
 
 It is faster than in R. Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.
-The cells that are at 0m distance are the cells containing the feature.
+The cells that are at 0m distance are the cells containing the feature (so the closest)!  
 ok TCD  
 ok AgriTree  
 ok FootTrails  
 ok Waterbodies  
 ok PavedRoads
-ok Track
-ok Shrub => Choose between distance or proportion  
+ok Track  
+ok Shrub  
 Distance done
-Proportion 250m
-ESM : 
+
+## COMPUTE PROPORTION OF LANDCOVER TYPE IN BUFFER
+
+Please see script Proportion.R
+(R::focal and R::focalWeight)
+
+Radius define as 250m (buffer of radius 250m) to have a proportion of cell that are the feature around each focal cell (proportion of feature neighbor)
+ 
 
 
 
