@@ -65,7 +65,7 @@ AgriTree_largePYR.tif
    3. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
    4. Cut the raster to the extent of raster_base (please see script Shrub.R)
    5. Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
-   6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area.
+   6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area and exclude grassland cut true to create true transitional area.
 
 4. **ELEVATION**
     1. Get Copernicus raster for E30N20 (PYR)  
@@ -322,6 +322,21 @@ This can be done for TCD, AgriTree, Shrub, ESM, Waterbodies, Roads
 
 ESM: distance to nearest settlement will be computed at 2.5m (if possible) then resample at 20m resolution for more exactitude
 However, how do we do for roads ? do we rasterize or not?
+
+2. **Proximity (distance raster) QGis**
+
+It is faster than in R. Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.
+The cells that are at 0m distance are the cells containing the feature.
+ok TCD  
+ok AgriTree  
+ok FootTrails  
+ok Waterbodies  
+ok PavedRoads
+ok Track
+ok Shrub => Choose between distance or proportion  
+Distance done
+Proportion 250m
+ESM : 
 
 
 
