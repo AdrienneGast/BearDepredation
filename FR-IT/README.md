@@ -299,6 +299,31 @@ out skel qt;
 3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
+4. **AGRICULTURE AND ARTIFICIAL AREAS**
+```
+"code_12"  = '111' OR 
+"code_12"  = '112' OR
+"code_12"  = '121' OR
+"code_12"  = '122' OR
+"code_12"  = '123' OR
+"code_12"  = '124' OR
+"code_12"  = '131' OR
+"code_12"  = '132' OR
+"code_12"  = '133' OR
+"code_12"  = '141' OR
+"code_12"  = '142' OR
+"code_12"  = '211' OR
+"code_12"  = '212' OR
+"code_12"  = '213' OR
+"code_12"  = '222' OR
+"code_12"  = '223' OR
+"code_12"  = '241' OR
+"code_12"  = '242' OR
+"code_12"  = '243' OR
+"code_12"  = '244' 
+```  
+             
+             
 4. **Clip grassland with inland waterbodies and bare_rock**
 please see script 6 Grassland.R
 
