@@ -89,14 +89,25 @@ AgriTree_largePYR.tif
     2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis::)
     3. Merge cropped raster layers in QGis through GRASS (GRASS::)   
     Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
-        For PYR => Save cropped files 
+        For PYR => Save cropped files ok  
         For IT => Merge the cropped files  
 WARNING: large raster files!
     4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.   
     
-  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati) with the PDF file for the ESM data.
-  Normaly, we can only select for (-0, -1, -2, -10, -15, -20, -25, -30) as it is grassland, bare_rocks or water. But we need to check for the other categories: with category 50 Buildings we also have some rocks that are taken...  
-  http://publications.jrc.ec.europa.eu/repository/bitstream/JRC105679/kjna28644enn.pdf  
+  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati / built up BU and non built up NBU) with the PDF file for the ESM data.   
+  http://publications.jrc.ec.europa.eu/repository/bitstream/JRC105679/kjna28644enn.pdf    
+  
+This file is very detailed for cities/villages. But, for countryside it can get tricky. For example, some buildings (category 50) happen to be rocks has it is from reflectance.  
+Moreover, around cities and villages, some agricultural lands are categorized as 20 which is the biggest category in terms of surface and this category overlap greatly with the Grassland layer.  
+Second, the grassland overlap with some agricultural lands which could induce noise for prediction.
+Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland LANDCOVER TYPE SPECIFICATION](Grassland LANDCOVER TYPE SPECIFICATION)).
+
+Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped this raster with roads (paved, unpaved and trails / because we already computed them),rocks (for not having a building that is not an actual one), tcd (idem as rocks) and grassland (without agricultural areas).
+
+  * disaggregate layers from 20m to 2.5m
+  * clipped raster ESM on those layers
+  * check (visualization) if it is ok and choose for the use of category 10 and 20.
+  **Please see ESM script**
   
 
 5. **ROADS**
