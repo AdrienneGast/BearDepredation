@@ -299,7 +299,21 @@ out skel qt;
 3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
-4. **AGRICULTURE AND ARTIFICIAL AREAS**
+4. **Clip grassland with inland waterbodies and bare_rock**
+please see script 6 Grassland.R
+
+=> Grasslandcut_largePYR.tif
+    
+5. **AGRICULTURE AND ARTIFICIAL AREAS**
+
+After having visualize the ESM map with all the other layers (mostly grassland, shrub, tcd, roads), we realize there were some areas that were not defined well in comparison with the satellite picture.  
+
+As such, near villages, some agricltural lands were defined as grassland with our Grasslandcut. However, in CLC12 those were defined as agricultural and/or artificial areas. And those areas are not in moutainous areas.
+
+Thus, in order to produce a map of grassland with the less noise possible. We decided to rerasterize the agricultural and artificial areas of CLC12 at 20m to exclude them from the grassland. However, it would not have been a problem for modeling, it could have increased the noise for prediction!  
+
+  * Select for agricultural and artificial areas in CLC12 shapefile in the large Pyrenees area  (of course vineyards, fruit trees and pastures have been excluded from this selection)
+    
 ```
 "code_12"  = '111' OR 
 "code_12"  = '112' OR
@@ -315,20 +329,16 @@ out skel qt;
 "code_12"  = '211' OR
 "code_12"  = '212' OR
 "code_12"  = '213' OR
-"code_12"  = '222' OR
 "code_12"  = '223' OR
 "code_12"  = '241' OR
 "code_12"  = '242' OR
 "code_12"  = '243' OR
-"code_12"  = '244' 
+"code_12"  = '244'
 ```  
+   * Rasterize this selection at 20m resolution on the pyrenees large area (raster_base) (GRASS:v.to.rast.value)
+   * Exclude those areas from grassland cut (please see script grassland)
              
-             
-4. **Clip grassland with inland waterbodies and bare_rock**
-please see script 6 Grassland.R
-
-=> Grasslandcut_largePYR.tif
-
+=> GrasslandcutT_largePYR.tif
 
 ## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
