@@ -5,7 +5,7 @@ This repository contains workflow and R codes to compute variables for depredati
 
 ## LandCover variables computed for analysis
  please see [Waterbodies](#7-waterbodies-and-waters)
- WATERBODIES AND WATERS
+
 1. **TREE COVER DENSITY**
     1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
     please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
@@ -184,7 +184,7 @@ Please see the explanation of the ArcGIS tool on the website of [Line Density](h
                                         * 3: FootTrails
 Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
     
-6. **WATERBODIES AND WATERS**
+7. **WATERBODIES AND WATERS**
     1. From Copernicus   
     https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015    
     
