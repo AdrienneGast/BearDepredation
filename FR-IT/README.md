@@ -1,5 +1,9 @@
 This repository contains workflow and R codes to compute variables for depredation factor analysis between France and Italy.
 
+* [Study area](#study-area)
+* [Landcover variables](#LandCover-variables-computed-for-analysis)
+* [Grassland landcover type](#Grassland-LANDCOVER-TYPE-SPECIFICATION) 
+
 ## STUDY AREA
 
 
