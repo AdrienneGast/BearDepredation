@@ -4,7 +4,7 @@ This repository contains workflow and R codes to compute variables for depredati
 
 
 ## LandCover variables computed for analysis
- please see [Waterbodies](#7-waterbodies-and-waters)
+ please see [Waterbodies](#7-WATERBODIES-AND-WATERS)
 
 1. **TREE COVER DENSITY**
     1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
