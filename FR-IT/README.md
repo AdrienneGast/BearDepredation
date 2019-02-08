@@ -109,8 +109,12 @@ Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped t
   * check (visualization) if it is ok and choose for the use of category 10 and 20.
   **Please see ESM script**
   
+5bis. **Roads Density**
 
-5. **ROADS**
+From paved and tracks roads merge large PYR
+in ArcGIS, Line Density (Spatial Analyst tool) at 50m, 100m, 200m and 250m.
+
+6. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
                            https://wiki.openstreetmap.org/wiki/Key:highway
     For PYRENEES we extract 
