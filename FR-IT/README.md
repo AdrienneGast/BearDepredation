@@ -355,7 +355,7 @@ Thus, in order to produce a map of grassland with the less noise possible. We de
 
 From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to cut exclude cells that are TCD>0 from grassland layer.  
 As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.  
-Please see script [Grassland.R](Grassland)
+Please see script [Grassland.R](#Grassland.R)
 
 ## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
