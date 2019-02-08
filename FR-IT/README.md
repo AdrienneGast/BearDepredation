@@ -23,7 +23,7 @@ This repository contains workflow and R codes to compute variables for depredati
         Then get CorineLandCover 2012 shapefile https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012  
         In QGis, select only vineyards (code_clc12 = 15 / 221),  
         rasterize at 20m resolution to match FADSL layer   
-        then crop and mask at the Pyrenees large area of analysis (please see part II of script TCD.R)
+        then crop and mask at the Pyrenees large area of analysis (please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R))
         
         Then in QGis,   
         A) load both raster layers FADSL and Vineyards (20m resolution, at Pyrenees large area)  
@@ -35,7 +35,7 @@ This repository contains workflow and R codes to compute variables for depredati
         "vine_maskrasterbase@1" = 1
         ```
         
-    4. Exclude non forest trees from the TCD layer please see part II of script TCD.R
+    4. Exclude non forest trees from the TCD layer please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
 
 TCDtrue_largePYR.tif
 
@@ -63,10 +63,10 @@ AgriTree_largePYR.tif
     clc12_shrub.shp
     
    3. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
-   4. Cut the raster to the extent of raster_base (please see script Shrub.R)
-   5. Put right number 0/1 for non shrub/shrub into the raster (please see script Shrub.R)
-   6. Exclude forest (TCD) from the shrub raster (please see script Shrub.R) to create the transitional area 
-   7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see Shrub.R)
+   4. Cut the raster to the extent of raster_base (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
+   5. Put right number 0/1 for non shrub/shrub into the raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
+   6. Exclude forest (TCD) from the shrub raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)) to create the transitional area 
+   7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
 
 4. **ELEVATION**
     1. Get Copernicus raster for E30N20 (PYR)  
@@ -80,8 +80,7 @@ AgriTree_largePYR.tif
     "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
     
 5. **ESM EUROPEAN SETTLEMENT MAP**
-    1. Get Copernicus raster layers   
-    https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green  
+    1. Get Copernicus raster layers on the website [Copernicus](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green)  
         for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32 (PYR)
         for (IT)
     CAREFUL VERY LARGE RASTER LAEYRS!  
@@ -94,13 +93,12 @@ AgriTree_largePYR.tif
 WARNING: large raster files!
     4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.   
     
-  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati / built up BU and non built up NBU) with the PDF file for the ESM data.   
-  http://publications.jrc.ec.europa.eu/repository/bitstream/JRC105679/kjna28644enn.pdf    
+  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati / built up BU and non built up NBU) with the PDF file for the [ESM data](http://publications.jrc.ec.europa.eu/repository/bitstream/JRC105679/kjna28644enn.pdf).    
   
 This file is very detailed for cities/villages. But, for countryside it can get tricky. For example, some buildings (category 50) happen to be rocks has it is from reflectance.  
 Moreover, around cities and villages, some agricultural lands are categorized as 20 which is the biggest category in terms of surface and this category overlap greatly with the Grassland layer.  
 Second, the grassland overlap with some agricultural lands which could induce noise for prediction.
-Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland LANDCOVER TYPE SPECIFICATION](Grassland LANDCOVER TYPE SPECIFICATION)).
+Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland LANDCOVER TYPE SPECIFICATION](##Grassland LANDCOVER TYPE SPECIFICATION )).
 
 Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped this raster with roads (paved, unpaved and trails / because we already computed them),rocks (for not having a building that is not an actual one), tcd (idem as rocks) and grassland (without agricultural areas).
 
