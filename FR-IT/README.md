@@ -229,7 +229,8 @@ Remark: roads can be in grassland. That is okay. I can be in grassland and have 
      
  **Waterbodies020m_largePYR.tif (combine inland waters and rivers net from both copernicus shapefile EU-Hydro and Open Street Map data for lakes because of more detailed data)**
      
-## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?) - artificial and agricultural areas (CLC) - TCDcut
+## Grassland LANDCOVER TYPE SPECIFICATION 
+**Grassland = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas (CLCartiandagri -231 - 221 -222) - TCDcut**
 
 1. Compute Grassland cover from Shapefile of CLC and Copernicus
  
