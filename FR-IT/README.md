@@ -119,6 +119,8 @@ From paved and tracks roads merge large PYR. We gave different weights to paved 
 in ArcGIS, Line Density (Spatial Analyst tool) at 50m, 100m, 200m and 250m.
 Please see the explanation of the ArcGIS tool on the website of [Line Density](https://pro.arcgis.com/fr/pro-app/tool-reference/spatial-analyst/how-line-density-works.htm)
 
+Some problems: where there is a lot of sinuosity (tracks) the density is high, even some time higher than in settlements/villages. Check how is it computed? compute it in R? Do a number of roads rather than density? do a surface of road rather than density or number?
+
 6. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
                            https://wiki.openstreetmap.org/wiki/Key:highway
