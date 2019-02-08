@@ -98,7 +98,7 @@ WARNING: large raster files!
 This file is very detailed for cities/villages. But, for countryside it can get tricky. For example, some buildings (category 50) happen to be rocks has it is from reflectance.  
 Moreover, around cities and villages, some agricultural lands are categorized as 20 which is the biggest category in terms of surface and this category overlap greatly with the Grassland layer.  
 Second, the grassland overlap with some agricultural lands which could induce noise for prediction.
-Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland LANDCOVER TYPE SPECIFICATION](#Grassland LANDCOVER TYPE SPECIFICATION)).
+Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland](#Grassland_LANDCOVER_TYPE_SPECIFICATION)).
 
 Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped this raster with roads (paved, unpaved and trails / because we already computed them),rocks (for not having a building that is not an actual one), tcd (idem as rocks) and grassland (without agricultural areas).
 
