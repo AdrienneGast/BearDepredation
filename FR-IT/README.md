@@ -10,7 +10,7 @@ This repository contains workflow and R codes to compute variables for depredati
     please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
 
     2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
-    to see how raster_base is created please refer to [STUDY AREA](study_area) 
+    to see how raster_base is created please refer to [STUDY AREA](#study_area) 
     and for reducing the raster please see part I of the script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
     
     3. *Create raster of non tcd* :   
