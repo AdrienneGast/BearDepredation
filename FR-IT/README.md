@@ -229,7 +229,7 @@ Remark: roads can be in grassland. That is okay. I can be in grassland and have 
      
  **Waterbodies020m_largePYR.tif (combine inland waters and rivers net from both copernicus shapefile EU-Hydro and Open Street Map data for lakes because of more detailed data)**
      
-## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?)
+## Grassland LANDCOVER TYPE SPECIFICATION = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies (tracks?) - artificial and agricultural areas (CLC) - TCDcut
 
 1. Compute Grassland cover from Shapefile of CLC and Copernicus
  
@@ -350,6 +350,12 @@ Thus, in order to produce a map of grassland with the less noise possible. We de
    * Exclude those areas from grassland cut (please see script grassland)
              
 => GrasslandcutT_largePYR.tif
+
+6. Clip grassland with TCD cut  
+
+From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to cut exclude cells that are TCD>0 from grassland layer.  
+As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.  
+Please see script [Grassland.R](Grassland)
 
 ## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
