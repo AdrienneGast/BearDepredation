@@ -113,6 +113,7 @@ Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped t
 
 From paved and tracks roads merge large PYR
 in ArcGIS, Line Density (Spatial Analyst tool) at 50m, 100m, 200m and 250m.
+Please see the explanation of the ArcGIS tool on the website of [Line Density](https://pro.arcgis.com/fr/pro-app/tool-reference/spatial-analyst/how-line-density-works.htm)
 
 6. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
