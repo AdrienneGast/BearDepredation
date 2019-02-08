@@ -68,3 +68,18 @@ grass4 <- overlay(grass, artif, fun = function(x, y) {
 plot(grass4)
 
 writeRaster(grass4,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/GrasslandcutT_largePYR.tif",overwrite=T)
+
+  # 4° Cut with TCD ----
+
+grass4<- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/GrasslandcutT_largePYR.tif")
+tcd <- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/TCDtrue_largePYR.tif")
+
+grass5 <- overlay(grass4, tcd, fun = function(x, y) {
+  x[y>01] <- 0
+  return(x)
+})
+
+plot(grass5)
+
+writeRaster(grass5,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/GrasslandcutT2_largePYR.tif",overwrite=T)
+
