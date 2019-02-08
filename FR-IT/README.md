@@ -182,7 +182,7 @@ Please see the explanation of the ArcGIS tool on the website of [Line Density](h
                                         * 2: Tracks
                                         * 3: FootTrails
 Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
-     
+     please see [waterbodies](#6-waterbodies-and-waters)
 6. **WATERBODIES AND WATERS**
     1. From Copernicus   
     https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015    
