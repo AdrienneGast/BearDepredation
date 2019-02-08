@@ -10,7 +10,7 @@ This repository contains workflow and R codes to compute variables for depredati
     https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015
 
     2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
-    to see how raster_base is created please refer to [STUDY AREA](#Study_area)  
+    to see how raster_base is created please refer to [STUDY AREA](#STUDY AREA)  
     and for reducing the raster please see part I of script R TCD.R
     
     3. *Create raster of non tcd* :   
@@ -355,7 +355,7 @@ Thus, in order to produce a map of grassland with the less noise possible. We de
 
 From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to cut exclude cells that are TCD>0 from grassland layer.  
 As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.  
-Please see script [Grassland.R](#Grassland.R)
+Please see script [Grassland.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Grassland.R)
 
 ## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
