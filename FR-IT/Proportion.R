@@ -38,13 +38,11 @@ plot(ShrubProp)
 writeRaster(ShrubProp,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/Shrubprop250m_largePYR.tif")
 
 
+# 2° Proportion of grassland ----
 
+ # import layers ----
 
-  # 2° Proportion of grassland ----
-
-# import layers ----
-
-grass <- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/Grasslandcut_largePYR.tif")
+grass <- raster("C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/GrasslandcutT2_largePYR.tif")
 
 
 # Create weight matrix ----
@@ -71,4 +69,4 @@ GrassProp <- focal(grass,w=fw,fun="sum",na.rm=T,pad=TRUE,padValue=F)
 plot(GrassProp)
 
 # extract raster ----
-writeRaster(GrassProp,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/Grassprop250m_largePYR.tif")
+writeRaster(GrassProp,"C:/Users/cazam/Desktop/OBJECTIF 2/Creation variables IT FR/rasterStack IT FR/rastersComplete/Grassprop250m_largePYR.tif")
