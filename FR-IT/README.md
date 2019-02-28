@@ -151,6 +151,9 @@ out skel qt;
 * Extract this shapefile and save it as LAEA projection
 * rasterize the merged vector layer at 20m resolution (GRASS::v.to.rast.value)    
 
+This data is from the French cadastre. Thus, there is less problems than with the ESM (true bati) but there are still somes discrepancies. However, it is better to use this one!
+Check again with openstreet map after rasterizing.
+
 6. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
                            https://wiki.openstreetmap.org/wiki/Key:highway
