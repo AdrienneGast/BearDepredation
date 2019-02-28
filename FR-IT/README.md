@@ -148,7 +148,8 @@ out skel qt;
 * create a unique field of 1 in each vector layer (QGis::Field Calculator)
 * suppress all the other field for each vector layer
 * merge the vector layers (SAGA::MergeVectorLayers)
-* rasterize the merged vector layer (GRASS::v.to.rast.value)    
+* Extract this shapefile and save it as LAEA projection
+* rasterize the merged vector layer at 20m resolution (GRASS::v.to.rast.value)    
 
 6. **ROADS**
     1. From overpass turbo https://overpass-turbo.eu/      
