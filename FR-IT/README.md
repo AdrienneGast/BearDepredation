@@ -150,7 +150,8 @@ out skel qt;
 * Reproject in LAEA CRS (EPSG+3035) (QGis::Reproject layer)
 * merge the vector layers (SAGA::MergeVectorLayers)
 * Extract this shapefile and save it as LAEA projection
-* rasterize the merged vector layer at 20m resolution over large Pyrenees area (raster_base.tif) (GRASS::v.to.rast.value)    
+* Create a buffer around each polygon in order to have them rasterized (GRASS::v.buffer)
+* rasterize the merged vector layer at 20m resolution over large Pyrenees area (raster_base.tif) (GRASS::v.to.rast)    
 
 This data is from the French cadastre. Thus, there is less problems than with the ESM (true bati) but there are still somes discrepancies. However, it is better to use this one!
 Check again with openstreet map after rasterizing.
