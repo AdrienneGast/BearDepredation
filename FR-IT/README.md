@@ -430,23 +430,10 @@ ok FootTrails
 ok Waterbodies  
 ok PavedRoads
 ok Track  
-ok Shrub  
+ok Shrub    
+ok Building (OSM)
 Distance done
 
- * ESM:
- 0=no data NON
- 1=water == Waterbodies NON
- 2=railways NON
- 10=NBU Area-Open Space == Rocks merge (openstreetmap) ou zone de forte pente rocheuse NON
- 15=NBU area-streets NON
- 20=NBU Area-Green NDVI == TCD &/ou rocks NON
- 25 = NBU Area-Street Green NDVI == trails NON
- 30 = BU Area-Open Space == grassland NON
- 35 = BU Area-Streets == ROADS
- 40 = BU Area-Green NDVI
- 41 = BU Area-Green UA
- 45 = BU Area-Street Green NDVI == ROADS
- 50 = BU Buildings 
  
  
 
