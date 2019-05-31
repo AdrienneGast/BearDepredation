@@ -80,48 +80,12 @@ AgriTree_largePYR.tif
     2. Resample at the large area of analysis (raster_base) at 20m resolution please see script Elevation.R  
     Resample with bilinear method :  
     "Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average."
-    
-5. **ESM EUROPEAN SETTLEMENT MAP**
-    1. Get Copernicus raster layers on the website [Copernicus](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green)  
-        for N24E32, N24E34, N24E36, N22E36, N22E34 and N22E32 (PYR)
-        for (IT)
-    CAREFUL VERY LARGE RASTER LAEYRS!  
-    
-    2. Crop each large raster layers to the study area for both Pyrenees and Alps (QGis::)
-    3. Merge cropped raster layers in QGis through GRASS (GRASS::)   
-    Mosaic to New Raster tool (because of memory issues and bug in latest version of QGis)
-        For PYR => Save cropped files ok  
-        For IT => Merge the cropped files  
-WARNING: large raster files!
-    4. Those are very large raster files. Thus, to merge them easily and to have much less large files, use GRASS::r.patch to merge the 6 files (GRASS::r.patch) on the raster_base extent.   
-    
-  Check for the categories (0 no data, 1 water, 2 railways, 10 area-open, 15 area-streets, 20 area-green, 25 area-street green, 30 area-open, 35 area-streets, 40 area green, 41 area-green, 45 area-street green, 50 buildings) which are very detailed (streets, bati / built up BU and non built up NBU) with the PDF file for the [ESM data](http://publications.jrc.ec.europa.eu/repository/bitstream/JRC105679/kjna28644enn.pdf).    
   
-This file is very detailed for cities/villages. But, for countryside it can get tricky. For example, some buildings (category 50) happen to be rocks has it is from reflectance.  
-Moreover, around cities and villages, some agricultural lands are categorized as 20 which is the biggest category in terms of surface and this category overlap greatly with the Grassland layer.  
-Second, the grassland overlap with some agricultural lands which could induce noise for prediction.
-Thus, we excluded artificial and agricultural areas CLC12 from grassland (see [Grassland](#Grassland-landcover-type-specification) ).
+5. **HUMAN BUILDINGS FROM NATIONAL CADASTRE**
 
-Thus, we select these categories: 50,45,41,40,35,30,25,15,(10). But we clipped this raster with roads (paved, unpaved and trails / because we already computed them),rocks (for not having a building that is not an actual one), tcd (idem as rocks) and grassland (without agricultural areas).
-
-  * disaggregate layers from 20m to 2.5m
-  * clipped raster ESM on those layers
-  * check (visualization) if it is ok and choose for the use of category 10 and 20.
-  **Please see ESM script**
-  
-5bis. **Roads Density**
-
-From paved and tracks roads merge large PYR. We gave different weights to paved roads (3) and tracks (1) in order to correlated that with the size/importance of the roads before merging.
-* merge vector layers (ArcGIS::merge)
-* line density (ArcGIS::line density, spatial analyst tool) at 50, 100, 150, 200, 250m radius
-in ArcGIS, Line Density (Spatial Analyst tool) at 50m, 100m, 200m and 250m.
-Please see the explanation of the ArcGIS tool on the website of [Line Density](https://pro.arcgis.com/fr/pro-app/tool-reference/spatial-analyst/how-line-density-works.htm)
-
-Some problems: where there is a lot of sinuosity (tracks) the density is high, even some time higher than in settlements/villages. Check how is it computed? compute it in R? Do a number of roads rather than density? do a surface of road rather than density or number?
-
-5c. **Buildings OpenStreetMap**
-
-* extract from open street map building = yes
+This comes from Open Street Map data which uses the national cadastre.
+    1. From [overpass turbo](https://overpass-turbo.eu/) and frome the [code information](https://wiki.openstreetmap.org/wiki/Key:highway), for the Pyrenees we extract the buildings both on the French and the Spanish parts.
+     * extract from open street map building = yes
 
 ```
 /*
@@ -142,29 +106,26 @@ out body;
 >;
 out skel qt;
 ```  
+    
+   2. In Qgis, we combine all the parts of JGson layers for the buildings data
+    * create a unique field of 1 in each vector layer (QGis::Field Calculator)
+    * suppress all the other field for each vector layer (attribute table)
+    * Reproject in LAEA CRS (EPSG+3035) (QGis::Reproject layer)
+    * merge the vector layers (SAGA::MergeVectorLayers)
+    * Extract this shapefile and save it as LAEA projection
 
-* create a unique field of 1 in each vector layer (QGis::Field Calculator)
-* suppress all the other field for each vector layer (attribute table)
-* Reproject in LAEA CRS (EPSG+3035) (QGis::Reproject layer)
-* merge the vector layers (SAGA::MergeVectorLayers)
-* Extract this shapefile and save it as LAEA projection
-* Create a buffer around each polygon in order to have them rasterized (GRASS::v.buffer)
-* rasterize the merged vector layer at 20m resolution over large Pyrenees area (raster_base.tif) (GRASS::v.to.rast)    
+   3. In Qgis, we then create a raster layer for the builings
+    * Create a buffer around each polygon in order to have them rasterized (GRASS::v.buffer)
+    * rasterize the merged vector layer at 20m resolution over large Pyrenees area (raster_base.tif) (GRASS::v.to.rast)    
 
-This data is from the French cadastre. Thus, there is less problems than with the ESM (true bati) but there are still somes discrepancies. However, it is better to use this one!
-Check again with openstreet map after rasterizing.
+This data is from the French cadastre. Thus, there is less problems than with the [ESM raster from Copernicus](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green) (true buildings) but there are still somes discrepancies. However, it is better to use this one!
+Another check with openstreet map after rasterizing was done.
 
 6. **ROADS**
-    1. From overpass turbo https://overpass-turbo.eu/      
-                           https://wiki.openstreetmap.org/wiki/Key:highway
-    For PYRENEES we extract 
+    1. From [overpass turbo](https://overpass-turbo.eu/) and frome the [code information](https://wiki.openstreetmap.org/wiki/Key:highway), for the Pyrenees we extract : 
                             * footway, path, 
                             * track,
-                            * motorway, trunk, primary, secondary, tertiary, unclassified, road 
-    For ALPES we extract  
-                            * footway, path,
-                            * track, 
-                            * motorway, trunk, primary, secondary, tertiary, unclassified, road      
+                            * motorway, trunk, primary, secondary, tertiary, unclassified, road  
      ```
     /*
     This has been generated by the overpass-turbo wizard.
