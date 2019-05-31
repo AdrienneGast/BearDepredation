@@ -24,7 +24,7 @@ This repository contains workflow and R codes to compute variables for depredati
         This is all trees that are non forest (urban and agricultural trees such as fruit trees)  
         
         But there is also vineyard that are not taken into account into FADSL (from quick visualization exploration)   
-        Then get CorineLandCover 2012 shapefile [Shape Vineyards](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
+        Then get CorineLandCover 2012 shapefile [CLC SHP](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
         In QGis, select only vineyards (code_clc12 = 15 / 221),  
         rasterize at 20m resolution to match FADSL layer   
         then crop and mask at the Pyrenees large area of analysis (please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R))
