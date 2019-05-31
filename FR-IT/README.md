@@ -73,10 +73,8 @@ AgriTree_largePYR.tif
    7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)
 
 4. **ELEVATION**
-    1. Get Copernicus raster for E30N20 (PYR)  
-    https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1
+    1. Get Copernicus raster for E30N20 (PYR)  [Copernicus raster](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1)
     It is at 25x25m resolution
-    
     It is the only one raster with a lower resolution so we are going to downscale the resolution to 20x20m
     
     2. Resample at the large area of analysis (raster_base) at 20m resolution please see script Elevation.R  
