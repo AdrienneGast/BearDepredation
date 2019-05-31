@@ -122,7 +122,7 @@ This data is from the French cadastre. Thus, there is less problems than with th
 Another check with openstreet map after rasterizing was done.
 
 6. **ROADS**
-    1. From [overpass turbo](https://overpass-turbo.eu/) and frome the [code information](https://wiki.openstreetmap.org/wiki/Key:highway), for the Pyrenees we extract : 
+    1. From [overpass turbo](https://overpass-turbo.eu/) and from the [code information](https://wiki.openstreetmap.org/wiki/Key:highway), for the Pyrenees we extract : 
                             * footway, path, 
                             * track,
                             * motorway, trunk, primary, secondary, tertiary, unclassified, road  
@@ -175,19 +175,16 @@ Another check with openstreet map after rasterizing was done.
      tertiary: The next most important roads in a country's system. (Often link smaller towns and villages). used for roads connecting smaller settlements, and within large settlements for roads connecting local centres. In terms of the transportation network, OpenStreetMap "tertiary" roads commonly also connect minor streets to more major roads. https://wiki.openstreetmap.org/wiki/Tag:highway%3Dtertiary    
      
      5. Merge per field  (MergeVectorLayers)
-                                        * 1:paved roads, == motorway, trunk, primary, secondary, tertiary, unclassified, road  
-                                        * 2:unpaved roads == track
-                                        * 3:foot trails, == path, footway
+                                        * 1:paved and unpaved roads, == motorway, trunk, primary, secondary, tertiary, unclassified, road,track 
+                                        * 2:foot trails, == path, footway
      
      6. We rasterize because shapefiles are very heavy and caluclations in R are too much to handle (20x20m, LAEA) (GRASS::v.to.rast.value) for the raster_base extent.
-                                        * 1: PavedRoads
-                                        * 2: Tracks
-                                        * 3: FootTrails
+                                        * 1: Roads (paved and unpaved)
+                                        * 2: FootTrails
 Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
     
 7. **WATERBODIES AND WATERS**
-    1. From Copernicus   
-    https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015    
+    1. From [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015)    
     
       1. Load the ".gdb" folder for Garonne, Ebro, and Rhone into QGis
       2. Select only InlandWater, River_Net_I
@@ -198,9 +195,8 @@ Remark: roads can be in grassland. That is okay. I can be in grassland and have 
       6. Merge River_Net for the 3 areas (QGis::Merge vector layers)
       => Rasterize this shapefile at 20m for large area Pyrenees (GRAS::v.to.rast.value)
       
-    2. From OpenStreet Map data with https://overpass-turbo.eu/    
-      1. We extracted natural=water  
-         https://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater  
+    2. From [OpenStreet Map data](https://overpass-turbo.eu/)    
+      1. We extracted [natural=water](https://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater)  
             
      ```
     /*
@@ -234,10 +230,10 @@ Remark: roads can be in grassland. That is okay. I can be in grassland and have 
      
  **Waterbodies020m_largePYR.tif (combine inland waters and rivers net from both copernicus shapefile EU-Hydro and Open Street Map data for lakes because of more detailed data)**
      
-## Grassland LANDCOVER TYPE SPECIFICATION 
+8. **GRASSLAND LANDCOVER TYPE SPECIFICATION** 
 **Grassland = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas (CLCartiandagri -231 - 221 -222) - TCDcut**
 
-1. Compute Grassland cover from Shapefile of CLC and Copernicus
+   1. Compute Grassland cover from Shapefile of CLC and Copernicus
  
     1. From CLC 12 shapefile :  
     Select only Grassland category (231 pastures, 321 natural grasslands, 333 semi open areas) in shapefile in QGis
@@ -248,14 +244,13 @@ Remark: roads can be in grassland. That is okay. I can be in grassland and have 
      ```
     2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (GRASS::v.to.rast.value, EPSG+3035/ETRS LAEA)  
   
-    3. Add to QGis the raster at 20m of Grassland from Copernicus     
-    https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps  
+    3. Add to QGis the raster at 20m of Grassland from [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps)  
     
     4. Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS** (GRASS::r.patch)  
     
 => Grasslandtot_largePYR.tif
 
-2. **Bare rocks land cover**
+   2. **Bare rocks land cover**
         * From https://overpass-turbo.eu/   
         we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
 
@@ -313,15 +308,15 @@ out skel qt;
    * Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
 
 
-3. **INLAND waterbodies raster**
+   3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
     
-4. **Clip grassland with inland waterbodies and bare_rock**
+   4. **Clip grassland with inland waterbodies and bare_rock**
 please see script 6 Grassland.R
 
 => Grasslandcut_largePYR.tif
     
-5. **AGRICULTURE AND ARTIFICIAL AREAS**
+   5. **AGRICULTURE AND ARTIFICIAL AREAS**
 
 After having visualize the ESM map with all the other layers (mostly grassland, shrub, tcd, roads), we realize there were some areas that were not defined well in comparison with the satellite picture.  
 
@@ -357,7 +352,7 @@ Thus, in order to produce a map of grassland with the less noise possible. We de
              
 => GrasslandcutT_largePYR.tif
 
-6. Clip grassland with TCD cut  
+   6. Clip grassland with TCD cut  
 
 From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to cut exclude cells that are TCD>0 from grassland layer.  
 As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.  
