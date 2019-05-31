@@ -57,7 +57,7 @@ AgriTree_largePYR.tif
 
 3. **SHRUB OR TRANSITIONAL WOODLAND-SHRUB AREA**
 
-    1. Get CorineLandCover 2012 shapefile
+    1. Get CorineLandCover 2012 shapefile [CLC SHP](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)
     2. Select only Shrub category (322, 323, 324 / code for transitional areas) in shapefile in QGis
      ```
      "code_12"  = '324' OR
@@ -67,10 +67,10 @@ AgriTree_largePYR.tif
     clc12_shrub.shp
     
    3. Rasterize the shapefile at 20m resolution (QGis gdal::rasterize, EPSG+3035/ETRS LAEA)
-   4. Cut the raster to the extent of raster_base (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
-   5. Put right number 0/1 for non shrub/shrub into the raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
-   6. Exclude forest (TCD) from the shrub raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)) to create the transitional area 
-   7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R))
+   4. Cut the raster to the extent of raster_base (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)
+   5. Put right number 0/1 for non shrub/shrub into the raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)
+   6. Exclude forest (TCD) from the shrub raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R) to create the transitional area 
+   7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)
 
 4. **ELEVATION**
     1. Get Copernicus raster for E30N20 (PYR)  
