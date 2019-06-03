@@ -463,4 +463,45 @@ aggregate, disaggregate, crop, extend, merge.
 * **package(raster)** **buffer()**
 * **package(raster)** **focal()**
 
+## SELECTION OF PRESENCES
 
+As 99% of attacks happen on sheep, our presence occurence data set contains only attacks on sheep by brown bear. (n=).
+Moreover, attacks information (such as GPS location, municipality, species, pastoral units...) will be extracted to explore the data set.
+
+```
+> datashp@data %>% group_by(libelle__1) %>% summarize(count=n())
+# A tibble: 4 x 2
+  libelle__1 count
+  <fct>      <int>
+1 Bovins         2
+2 Caprins        1
+3 Equins         1
+4 Ovins        762
+```
+
+
+## SELECTION OF ABSENCES 
+
+To select for absences, we chose to randomly take points inside a specific annual area.
+This specific area is the annual area of presence of brown bear combined with the presence area of sheep
+
+**First step** select for pastoral units inside brown bear annual presence area (every year)
+```
+> nbestive
+ [1]    0    0    0    0    0    0    0   NA   NA   NA   NA   NA   NA   NA   NA   NA
+[17]   NA   NA   NA   NA   NA   NA   NA 1269 1119  844 1123 1029 1055 1908
+```
+**Second step** Select for annual data
+```
+> nbestive_v1
+                                   2010 2011 2012 2013 2014 2015 2016 
+   0    0    0    0    0    0    0  148  134   94  143  131  127  255 
+```
+
+**Third step** select only patoral units containing domestic animals
+```
+> nbestive_v2
+                                   2010 2011 2012 2013 2014 2015 2016 
+   0    0    0    0    0    0    0  144  129   93  139  127  122  245 
+```
+**Fourth step** we make the presence data points +/- 1367m buffer with the presence area pastures containing domestic animals ( we did not chose only for those containing sheep!!)
