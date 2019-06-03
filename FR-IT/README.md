@@ -480,28 +480,35 @@ Moreover, attacks information (such as GPS location, municipality, species, past
 ```
 
 
-## SELECTION OF ABSENCES 
+## SELECTION OF ABSENCES (script 17)
 
 To select for absences, we chose to randomly take points inside a specific annual area.
 This specific area is the annual area of presence of brown bear combined with the presence area of sheep
 
-**First step** select for pastoral units inside brown bear annual presence area (every year)
+**First step** select for pastoral units inside brown bear annual presence area (every year) (script create pastoral data)
 ```
 > nbestive
  [1]    0    0    0    0    0    0    0   NA   NA   NA   NA   NA   NA   NA   NA   NA
 [17]   NA   NA   NA   NA   NA   NA   NA 1269 1119  844 1123 1029 1055 1908
 ```
-**Second step** Select for annual data
+**Second step** Select for annual data (script create pastoral data)
 ```
 > nbestive_v1
                                    2010 2011 2012 2013 2014 2015 2016 
    0    0    0    0    0    0    0  148  134   94  143  131  127  255 
 ```
 
-**Third step** select only patoral units containing domestic animals
+**Third step** select only patoral units containing domestic animals (script create pastoral data)
 ```
 > nbestive_v2
                                    2010 2011 2012 2013 2014 2015 2016 
    0    0    0    0    0    0    0  144  129   93  139  127  122  245 
 ```
-**Fourth step** we make the presence data points +/- 1367m buffer with the presence area pastures containing domestic animals ( we did not chose only for those containing sheep!!)
+**Fourth step** we make the presence data points +/- 1367m (all data on domestic animals not only sheep) buffer with the presence area pastures containing domestic animals (we did not chose only for those containing sheep!!) (script 17)
+
+## CREATING DATA FRAME FOR ANALYSIS
+
+**1** we extract (st_join) the pastoral data information for each attacks using shapefiles and attacks information (no need to rasterize pastoral data) (script 17)
+**2** we extract for each point environmental data (per annual attack data) (script 18)
+**3** we extract for each point per year bear density activity per annual attack data (script 18)
+**4** we make only one data frame considering all of this information (script 18)
