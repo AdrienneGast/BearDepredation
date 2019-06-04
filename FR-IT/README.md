@@ -660,3 +660,7 @@ ndshrub.std         0.89405    0.39325   2.273  0.02300 *
 ndagri.std          0.33460    0.95096   0.352  0.72495    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+
+With ruggedness and slope correlated at r=0.98, we chose in order to reduce the number of variables to use only ruggedness.
+Then, we use r>0.35 to exclude less correlated variables from similar models.
