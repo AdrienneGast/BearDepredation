@@ -515,4 +515,22 @@ This specific area is the annual area of presence of brown bear combined with th
 
 ## EXPLORE DATA
 
-
+*how many times attacks happen in unguarded pastures : 
+```
+tab2%>%group_by(Occurence,nbGard)%>%summarise(compteur=n())
+# A tibble: 11 x 3
+# Groups:   Occurence [2]
+   Occurence nbGard compteur
+   <fct>      <int>    <int>
+ 1 0              0      204
+ 2 0              1      202
+ 3 0              2       79
+ 4 0              3       28
+ 5 0              4        6
+ 6 0              5        3
+ 7 1              0       17
+ 8 1              1      356
+ 9 1              2      100
+10 1              3       37
+11 1              4       12
+```
