@@ -512,3 +512,7 @@ This specific area is the annual area of presence of brown bear combined with th
 **2** we extract for each point environmental data (per annual attack data) (script 18)
 **3** we extract for each point per year bear density activity per annual attack data (script 18)
 **4** we make only one data frame considering all of this information (script 18)
+
+## EXPLORE DATA
+
+
