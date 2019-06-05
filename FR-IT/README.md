@@ -465,7 +465,7 @@ aggregate, disaggregate, crop, extend, merge.
 
 ## SELECTION OF PRESENCES
 
-As 99% of attacks happen on sheep, our presence occurence data set contains only attacks on sheep by brown bear. (n=).
+**As 99% of attacks happen on sheep, our presence occurence data set contains only attacks on sheep by brown bear. (n=).**
 Moreover, attacks information (such as GPS location, municipality, species, pastoral units...) will be extracted to explore the data set.
 
 ```
@@ -482,7 +482,7 @@ Moreover, attacks information (such as GPS location, municipality, species, past
 
 ## SELECTION OF ABSENCES (script 17)
 
-To select for absences, we chose to randomly take points inside a specific annual area.
+1. To select for absences, we chose to randomly take points inside a specific annual area.
 This specific area is the annual area of presence of brown bear combined with the presence area of sheep
 
 **First step** select for pastoral units inside brown bear annual presence area (every year) (script create pastoral data)
@@ -513,8 +513,13 @@ This specific area is the annual area of presence of brown bear combined with th
 **3** we extract for each point per year bear density activity per annual attack data (script 18)
 **4** we make only one data frame considering all of this information (script 18)
 
+2. To select for absences, we take presence of brown bear's attacks buffered (1367m) randomly inside a square in Central Pyrenees (not only inside brown bear presence and sheep presence  
+(here the random effect Pastures name will not be taken into account)
+
 ## EXPLORE DATA
-*explore environmental data
+*explore environmental data*  
+See script 19
+
 *how many times attacks happen in unguarded pastures : 
 ```
 tab2%>%group_by(Occurence,nbGard)%>%summarise(compteur=n())
@@ -537,52 +542,11 @@ tab2%>%group_by(Occurence,nbGard)%>%summarise(compteur=n())
 
 ## ENVIRONMENTAL DREDGE
 
-if threshold for multicolinearity at r>0.35 some warning messages about hegian matrix of several models thus no weight for each model
-(nmodels = 4032)
-if threshold for multicolinearity at r>0.6
+1. For **true absences** selection : 
+if threshold for multicolinearity at r>0.6, we do not have to exclude pairs of variables from the same models. Actually, only ruggedness and slope are correlated at 0.98. Thus, based on several references on brown bear habitat use, we chose to display model selection only with the ruggedness. Moreover, the elevation was also removed from model selection as it is inherent part of our biologic models.
+Thus, the **complete model** for environment selection is: 
 
-complete models : 
 ```
-> summary(MCenv)
- Family: binomial  ( logit )
-Formula:          
-Occurence ~ ndRoads.std + ndbuild.std + ndfoot.std + tri.std +  
-    slo.std + grass.std + ndwater.std + BA.std + patchdens.std +  
-    I(patchdens.std^2) + ndtcd.std + I(ndtcd.std^2) + ndshrub.std +  
-    ndagri.std + (1 | Annee) + (1 | Nom_Estive)
-Data: tab2
-
-     AIC      BIC   logLik deviance df.resid 
-   562.6    646.7   -264.3    528.6     1027 
-
-Random effects:
-
-Conditional model:
- Groups     Name        Variance  Std.Dev. 
- Annee      (Intercept) 4.313e-09 6.567e-05
- Nom_Estive (Intercept) 4.801e+01 6.929e+00
-Number of obs: 1044, groups:  Annee, 7; Nom_Estive, 72
-
-Conditional model:
-                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        -5.75390    2.15052  -2.676  0.00746 ** 
-ndRoads.std         0.04186    0.46617   0.090  0.92844    
-ndbuild.std        -0.65923    0.41580  -1.585  0.11287    
-ndfoot.std         -1.55967    0.39195  -3.979 6.91e-05 ***
-tri.std            -0.96737    1.10095  -0.879  0.37958    
-slo.std             0.45902    1.12120   0.409  0.68225    
-grass.std           2.28491    0.33291   6.863 6.72e-12 ***
-ndwater.std         0.50635    0.33875   1.495  0.13497    
-BA.std              0.45737    0.24827   1.842  0.06544 .  
-patchdens.std      -0.08560    0.83431  -0.103  0.91828    
-I(patchdens.std^2) -1.77109    1.45486  -1.217  0.22347    
-ndtcd.std           1.60941    0.63089   2.551  0.01074 *  
-I(ndtcd.std^2)     -1.02662    0.53555  -1.917  0.05524 .  
-ndshrub.std         0.85833    0.39481   2.174  0.02970 *  
-ndagri.std          0.36777    0.95734   0.384  0.70086    
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
 > summary(MCenvtri)
  Family: binomial  ( logit )
 Formula:          
@@ -621,46 +585,5 @@ ndshrub.std         0.87650    0.39254   2.233  0.02556 *
 ndagri.std          0.36033    0.95621   0.377  0.70630    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-> summary(MCenvslo)
- Family: binomial  ( logit )
-Formula:          
-Occurence ~ ndRoads.std + ndbuild.std + ndfoot.std + slo.std +  
-    grass.std + ndwater.std + BA.std + patchdens.std + I(patchdens.std^2) +  
-    ndtcd.std + I(ndtcd.std^2) + ndshrub.std + ndagri.std + (1 |  
-    Annee) + (1 | Nom_Estive)
-Data: tab2
-
-     AIC      BIC   logLik deviance df.resid 
-   561.3    640.5   -264.6    529.3     1028 
-
-Random effects:
-
-Conditional model:
- Groups     Name        Variance  Std.Dev. 
- Annee      (Intercept) 4.741e-09 6.885e-05
- Nom_Estive (Intercept) 4.854e+01 6.967e+00
-Number of obs: 1044, groups:  Annee, 7; Nom_Estive, 72
-
-Conditional model:
-                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        -5.79328    2.13237  -2.717  0.00659 ** 
-ndRoads.std         0.06420    0.46691   0.138  0.89063    
-ndbuild.std        -0.66020    0.41530  -1.590  0.11190    
-ndfoot.std         -1.57411    0.39141  -4.022 5.78e-05 ***
-slo.std            -0.50190    0.26853  -1.869  0.06161 .  
-grass.std           2.27630    0.33249   6.846 7.58e-12 ***
-ndwater.std         0.53733    0.33785   1.590  0.11174    
-BA.std              0.46424    0.24803   1.872  0.06124 .  
-patchdens.std      -0.07133    0.83434  -0.085  0.93187    
-I(patchdens.std^2) -1.75245    1.45238  -1.207  0.22758    
-ndtcd.std           1.59131    0.63189   2.518  0.01179 *  
-I(ndtcd.std^2)     -1.00722    0.53592  -1.879  0.06019 .  
-ndshrub.std         0.89405    0.39325   2.273  0.02300 *  
-ndagri.std          0.33460    0.95096   0.352  0.72495    
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ```
-
-With ruggedness and slope correlated at r=0.98, we chose in order to reduce the number of variables to use only ruggedness.
-Then, we use r>0.35 to exclude less correlated variables from similar models.
+We computed the dredge on the complete model's formula. And we gave the specific information of quadratic relationships in the subset.
