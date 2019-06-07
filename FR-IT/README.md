@@ -542,6 +542,104 @@ tab2%>%group_by(Occurence,nbGard)%>%summarise(compteur=n())
 
 ## ENVIRONMENTAL DREDGE
 
+# For **pseudo-absences** selection :
+
+if threshold for multicolinearity at r>0.6, we do not have to exclude pairs of variables from the same models. Actually, only ruggedness and slope are correlated at 0.98. Thus, based on several references on brown bear habitat use, we chose to display model selection only with the ruggedness. Moreover, the elevation was also removed from model selection as it is inherent part of our biologic models.  
+
+1. Chose for random effect: we have an annual response variable thus we have the Year as random factor
+```
+> r.squaredGLMM(mran)
+     R2m          R2c
+[1,]   0 2.003815e-10
+```  
+2. Complete model 
+
+```
+> summary(MCenvtri)
+ Family: binomial  ( logit )
+Formula:          
+Occurence ~ ndRoads.std + ndbuild.std + ndfoot.std + tri.std +  
+    grass.std + ndwater.std + BA.std + patchdens.std + I(patchdens.std^2) +  
+    ndtcd.std + I(ndtcd.std^2) + ndshrub.std + ndagri.std + (1 |      Annee)
+Data: tab2
+
+     AIC      BIC   logLik deviance df.resid 
+   331.6    405.8   -150.8    301.6     1029 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ Annee  (Intercept) 0.48     0.6928  
+Number of obs: 1044, groups:  Annee, 7
+
+Conditional model:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         -1.63329    0.52699  -3.099 0.001940 ** 
+ndRoads.std          1.24754    0.43384   2.876 0.004033 ** 
+ndbuild.std         -2.00060    0.75937  -2.635 0.008425 ** 
+ndfoot.std          -2.44726    0.66718  -3.668 0.000244 ***
+tri.std              0.03567    0.36935   0.097 0.923054    
+grass.std            3.44886    0.41940   8.223  < 2e-16 ***
+ndwater.std          0.13345    0.38372   0.348 0.728014    
+BA.std               2.27892    0.66980   3.402 0.000668 ***
+patchdens.std      -12.80946    2.83937  -4.511 6.44e-06 ***
+I(patchdens.std^2) -24.83493    5.53679  -4.485 7.28e-06 ***
+ndtcd.std            1.66930    0.54286   3.075 0.002105 ** 
+I(ndtcd.std^2)      -1.04608    0.43225  -2.420 0.015518 *  
+ndshrub.std          1.07632    0.62974   1.709 0.087422 .  
+ndagri.std           5.11434    0.75105   6.810 9.79e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```  
+3. Dredge  
+the 13 first models are in a delta AICc <=2
+
+4. Averaging on those 13 first models
+
+5. Cheking model's assumption (spatial correlation) with bubble plot, corrplot and global moran's I on both full model and best model of dredge
+Full model :
+```
+> tab <- tab2
+> coordinates(tab) <- ~ X + Y
+> xy <- coordinates(tab)
+> tab2.nb <- dnearneigh(xy,0, 1367)
+> tab2.listw <- nb2listw(tab2.nb,style='B',zero.policy=TRUE)
+> tes.mor <- moran.test(residuals(MCenvtri,type="response"),listw=tab2.listw,randomisation=T,zero.policy = TRUE)
+> tes.mor
+
+	Moran I test under randomisation
+
+data:  residuals(MCenvtri, type = "response")  
+weights: tab2.listw  n reduced by no-neighbour observations
+  
+
+Moran I statistic standard deviate = 7.3508, p-value = 9.853e-14
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+     0.0742726570     -0.0016638935      0.0001067176 
+```  
+Best model :
+``` 
+> tes.mor
+
+	Moran I test under randomisation
+
+data:  residuals(best.mod, type = "response")  
+weights: tab2.listw  n reduced by no-neighbour observations
+  
+
+Moran I statistic standard deviate = 7.0052, p-value = 1.233e-12
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+      0.070734485      -0.001663894       0.000106812 
+ ```  
+ 
+    
+     
+
 # For **true absences** selection :   
 
 if threshold for multicolinearity at r>0.6, we do not have to exclude pairs of variables from the same models. Actually, only ruggedness and slope are correlated at 0.98. Thus, based on several references on brown bear habitat use, we chose to display model selection only with the ruggedness. Moreover, the elevation was also removed from model selection as it is inherent part of our biologic models.  
