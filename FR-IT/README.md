@@ -819,4 +819,9 @@ Importance:          0.10                     0.04
 N containing models:    2                        1  
 ```
 
+*Brown bear activity for the complete period*
+To predict at the pyrenees, we computed the mean of brown bear activity in QGis::RastorCalculator as:
+```
+("Raster20_buf2000_2010OursAct@1" + "Raster20_buf2000_2011OursAct_nona@1" + "Raster20_buf2000_2012OursAct@1" + "Raster20_buf2000_2013OursAct@1" + "Raster20_buf2000_2014OursAct@1" + "Raster20_buf2000_2015OursAct@1" + "Raster20_buf2000_2016OursAct@1")/7
+```
 
