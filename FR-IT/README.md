@@ -673,7 +673,7 @@ theoretical   0 0.8361185
 It means that this random factor of pastures ID captures a lot of the pattern of the response variable... (spatial correlation).
 
 
-Thus, the **complete model** for environment selection is: 
+2. Thus, the **complete model** for environment selection is: 
 
 ```
 > summary(MCenvtri)
@@ -719,6 +719,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
                      R2m          R2c
 theoretical 9.820576e-02 9.426671e-01
 ```
+3. Dredge  
 We computed the dredge on the complete model's formula. And we gave the specific information of quadratic relationships in the subset.
 We select for averaging the 16 first models as they have a delta AICc<=2 with the best model (smallest AICc).
 
@@ -770,7 +771,7 @@ Random terms (all models):
 ‘cond(1 | Annee)’, ‘cond(1 | Nom_Estive)’
 ```
 
-Averaging : 
+4. Averaging on the 16 first models (delta AICc <= 2) :   
 ```
 Model-averaged coefficients:  
 (full average) 
@@ -818,6 +819,26 @@ N containing models:   14                   14            8                 6   
 Importance:          0.10                     0.04             
 N containing models:    2                        1  
 ```
+
+5. Checking model assumptions with bubble plot and correlogram and moran's I test on the full model and best model : 
+For full model : 
+```
+> tes.mor
+
+	Moran I test under randomisation
+
+data:  res.mod  
+weights: tabV.listw  n reduced by no-neighbour observations
+  
+
+Moran I statistic standard deviate = 7.3251, p-value = 1.193e-13
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+     7.207171e-02     -1.059322e-03      9.967218e-05 
+``` 
+
+
 
 *Brown bear activity for the complete period*
 To predict at the pyrenees, we computed the mean of brown bear activity in QGis::RastorCalculator as:
