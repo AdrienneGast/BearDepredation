@@ -22,6 +22,7 @@ Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearCon
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
 Thus, we had computed:
 - [Tree Cover Density](##tree-cover-density)  
+- [Agriculutural trees](##agricultural-trees)
 
 1. **TREE COVER DENSITY**
     1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
