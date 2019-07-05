@@ -103,7 +103,9 @@ The extraction might take time and has to been done in several parts for large a
 
    - Buffer the polygon of the building vector layer to ease the rasterization (GRASS::v.buffer)
    - Rasterize the previous layer (merged buffered building layer) at 20m resolution at the large study area (projection LAEA)
-After rasterizing the OSM national cadastral information we did another visualization check for discrepancies. Even though, there are still some differences it is less obvious and they are less numerous.  
+After rasterizing the OSM national cadastral information we did another visualization check for discrepancies. Even though, there are still some differences it is less obvious and they are less numerous. 
+
+=> Creation of Buildings raster layer.
 
 ## Roads
 - Extract roads from [overpass turbo](https://overpass-turbo.eu/) with the provided [code information](https://wiki.openstreetmap.org/wiki/Key:highway). The overpass turbo code is provided below:
