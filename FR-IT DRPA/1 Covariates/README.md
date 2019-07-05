@@ -2,7 +2,8 @@ This repository contains workflow and R codes to compute variables for depredati
 
 * [Study area](#Study-area)
 * [Landcover variables](#LandCover-covariates)
-* [Grassland landcover type](#Grassland-LANDCOVER-TYPE-SPECIFICATION) 
+* [Proportion computation](#compute-proportion-rasters)
+* [Nearest distance computation](#compute-nearest-distance-rasters)
 
 # Study area  
 
