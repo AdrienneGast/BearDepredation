@@ -99,7 +99,7 @@ The extraction might take time and has to been done in several parts for large a
 
    - Merge all the extracted OSM data to create a shapefile of buildings. To do so, we combine all the buildings GeoJson files (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers). 
    
-*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R*
+*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*
 
    - Buffer the polygon of the building vector layer to ease the rasterization (GRASS::v.buffer)
    - Rasterize the previous layer (merged buffered building layer) at 20m resolution at the large study area (projection LAEA)
@@ -130,13 +130,13 @@ As described for [Buildings](#human-buildings), the extraction is done in severa
 
 *same process than [Buildings](#human-buildings) for each category* 
 - Merge all the extracted OSM data to create a shapefile of roads in each category. To do so, we combine all the roads GeoJson files (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers). 
-*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R*
+*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*
 => Creation of separated shapefiles of path, footway, track, motorway, trunk, primary, secondary, tertiary, unclassified and road.  
         
 - Merge vector layer per created category for the study: a) Roads (motorway, trunk, primary, secondary, tertiary, unclassified, road and track), b) foot trails (path and footway).  
 - Rasterize roads and foot trails vector layers (GRASS::v.to.rast.value) at 20m resolution (LAEA projection) for the large study area. 
 
-    
+=> Creation of Roads raster layer and Foot trails raster layer. 
 
 ## Shrub and transitional woodland-shrub area  
 
