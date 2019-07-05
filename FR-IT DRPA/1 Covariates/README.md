@@ -17,7 +17,7 @@ The Pyrenees are a large mountain chain ranging from France to Spain and Andorra
 Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)  
 
 
-# LandCover covariates
+# Landcover covariates
 
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
 Thus, we had computed:
