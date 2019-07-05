@@ -24,7 +24,7 @@ Thus, we had computed:
 - [Tree Cover Density](##**tree-cover-density**)  
 - [Agriculutural trees](##**agricultural-trees**)
 
-## **TREE COVER DENSITY**  
+## Tree Cover Density 
 
  1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
     please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
@@ -59,7 +59,7 @@ Thus, we had computed:
 
 TCDtrue_largePYR.tif
 
-## **AGRICULTURAL TREES**
+## Agricultural trees
 
     1. Get raster of FADSL at large Pyrenees and Vineyards at large Pyrenees
     2. In QGis, create raster from raster calculation with 0/1 for only FASDL(code 3 agricultural trees) and vineyard (which is CLC(15) constructed before see non tcd raster before)
