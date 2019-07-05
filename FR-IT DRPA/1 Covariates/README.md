@@ -41,7 +41,7 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
         - From [CorineLandCover 2012 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012), we select only vineyards ``` code_clc12 = 15 / 221 ```, and rasterize at 20m resolution to match raster layers. Then, we crop and mask this vineyard raster at the Pyrenees large area of analysis.
 => Creation of the Vineyard raster layer
         - Load FADSL and Vineyard raster layers in QGis (20m resolution, LAEA proj, large area)  
-        - Combine both rasters into one binary raster layer  of non(QGis::Raster Calculator)    
+        - Combine both rasters into one binary raster layer  of non forest trees (QGis::Raster Calculator)      
 ```
 "FASDL_maskrasterbase@1"  = 3  OR   
 "FASDL_maskrasterbase@1"  = 4  OR   
