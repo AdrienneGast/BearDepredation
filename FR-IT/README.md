@@ -2,6 +2,6 @@ This repository contains the workflow, scripts and descrpition of depredation ri
 You will find in this repository:
 - the creation of covariates     
 - the creation of the data set on both sides (occurence)
-- the modeling workflow  
+- the modeling workflow   
 We conducted this study mainly on R version 3.5 (CoreTeam,2017) and with QGis version 3.4 ().
 
