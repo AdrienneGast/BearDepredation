@@ -1,13 +1,27 @@
 This repository contains workflow and R codes to compute variables for depredation factor analysis between France and Italy.
 
 * [Study area](#study-area)
-* [Landcover variables](#LandCover-variables-computed-for-analysis)
+* [Landcover variables](#LandCover-covariates)
 * [Grassland landcover type](#Grassland-LANDCOVER-TYPE-SPECIFICATION) 
 
-## STUDY AREA
+# Study area  
+
+## Pyrenees study area  
+
+The Pyrenees are a large mountain chain ranging from France to Spain and Andorra. Those mountains are separated from others, such as the Cantabrian, and are thus containing an isolated brown bear population. Thus, we chose an area large enough to contain all the brown bear range and possible dispersal areas in order to be able to predict at large scale even in areas not yeat colonized by brown bears.
+
+(add an image)
+
+## Alps study area  
+
+Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)  
 
 
-## LandCover variables computed for analysis
+# LandCover covariates
+
+We first compute landscape rasters from which we will calculate nearest distances and proportions.
+Thus, we had computed:
+- [Tree Cover Density](##tree-cover-density)  
 
 1. **TREE COVER DENSITY**
     1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
