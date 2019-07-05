@@ -53,7 +53,7 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
  2. Create tree cover density raster layer   
         - Download [Copernicus TCD layer 2015](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015) for E30N20  
         - Crop and mask the TCD layer with the large area of analysis  
-        - Exclude non forest trees from the TCD layer   
+        - Exclude non forest trees from the TCD layer (add script)      
 => Creation of the forest raster layer
 
 ## Agricultural trees
