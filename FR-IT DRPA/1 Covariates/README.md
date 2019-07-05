@@ -197,30 +197,7 @@ Thus we have two things:
    6. Exclude forest (TCD) from the shrub raster (please see script [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R) to create the transitional area 
    7. And exclude grassland cut true to create true transitional area (once the grassland layer is done, please see [Shrub.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Shrub.R)
 
- 
-
-
-8. **GRASSLAND LANDCOVER TYPE SPECIFICATION** 
-**Grassland = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas (CLCartiandagri -231 - 221 -222) - TCDcut**
-Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
-   1. Compute Grassland cover from Shapefile of CLC and Copernicus
- 
-    1. From CLC 12 shapefile :  
-    Select only Grassland category (231 pastures, 321 natural grasslands, 333 semi open areas) in shapefile in QGis
-     ```
-    "code_12"  = '231' OR
-    "code_12"  = '321' OR
-    "code_12" ='333'
-     ```
-    2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (GRASS::v.to.rast.value, EPSG+3035/ETRS LAEA)  
-  
-    3. Add to QGis the raster at 20m of Grassland from [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps)  
-    
-    4. Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS** (GRASS::r.patch)  
-    
-=> Grasslandtot_largePYR.tif
-
-   2. **Bare rocks land cover**
+## Bare rocks land cover
         * From https://overpass-turbo.eu/   
         we extracted data for bbox ~ our study area (the bbox is defined on the website by the map you chose to see)   
 
@@ -276,7 +253,30 @@ out skel qt;
         
    * Merge all the vectors into 1 raster layer 20m for large area PYRENEES (QGis::Merge vector layers)
    * Rasterize at 20m resolution over large area Pyrenees (raster_base.tif) (GRASS::v.to.rast.value)
+ 
 
+
+8. **GRASSLAND LANDCOVER TYPE SPECIFICATION** 
+**Grassland = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas (CLCartiandagri -231 - 221 -222) - TCDcut**
+Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.
+   1. Compute Grassland cover from Shapefile of CLC and Copernicus
+ 
+    1. From CLC 12 shapefile :  
+    Select only Grassland category (231 pastures, 321 natural grasslands, 333 semi open areas) in shapefile in QGis
+     ```
+    "code_12"  = '231' OR
+    "code_12"  = '321' OR
+    "code_12" ='333'
+     ```
+    2. Rasterize the shapefile at 20m resolution and clip it for PYR large area (raster_base.tif) (GRASS::v.to.rast.value, EPSG+3035/ETRS LAEA)  
+  
+    3. Add to QGis the raster at 20m of Grassland from [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps)  
+    
+    4. Merge the 2 rasters of grassland **RASTER GRASSLAND CLC (231,321,333) AND COPERNICUS** (GRASS::r.patch)  
+    
+=> Grasslandtot_largePYR.tif
+
+   
 
    3. **INLAND waterbodies raster**
     Use InlandWater_PYR_LAEA_20.tif (created for waterbodies variable) [WATERBODIES AND WATERS](6.Waterbodies and waters)  
