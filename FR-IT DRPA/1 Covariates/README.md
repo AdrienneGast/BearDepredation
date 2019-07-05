@@ -24,8 +24,9 @@ Thus, we had computed:
 - [Tree Cover Density](##tree-cover-density)  
 - [Agriculutural trees](##agricultural-trees)
 
-1. **TREE COVER DENSITY**
-    1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
+## **TREE COVER DENSITY**  
+
+ 1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
     please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
 
     2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
