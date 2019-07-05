@@ -14,9 +14,8 @@ The Pyrenees are a large mountain chain ranging from France to Spain and Andorra
 
 ## Alps study area  
 
-Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)  
-
-
+Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)   
+  
 # Landcover covariates
 
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
@@ -33,19 +32,11 @@ Thus, we had computed:
 
 ## Tree Cover Density 
 
- 1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
-    please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
+The tree cover density (TCD) will allow us to compute nearest distance to forest. Thus, we keep attention to details for the forest areas but not for the type of forest. Thus, we exclude trees that are urban and agricultural trees, as they do not represent good quality habitat for bears as well as not a "wild" mountainous habitat.   
 
-    2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
-    to see how raster_base is created please refer to [STUDY AREA](#study_area) 
-    and for reducing the raster please see part I of the script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
-    
-    3. *Create raster of non tcd* :   
-        From Copernicus download E30N20 raster for FADSL at 20m resolution (2015)  
-        please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015)  
-        Create raster (crop and mask) for the large area of analysis (raster_base.tif) please see part II of script TCD.R  
-        This is all trees that are non forest (urban and agricultural trees such as fruit trees)  
-        
+1. Non forest raster:  
+        - From [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015), download the forest additional support layer (FADSL, E30N20, 20m resolution, LAEA)   
+        - Crop and mask the raster for the large area of analysis
         But there is also vineyard that are not taken into account into FADSL (from quick visualization exploration)   
         Then get CorineLandCover 2012 shapefile [CLC SHP](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
         In QGis, select only vineyards (code_clc12 = 15 / 221),  
@@ -61,6 +52,19 @@ Thus, we had computed:
         "FASDL_maskrasterbase@1"  = 5 OR 
         "vine_maskrasterbase@1" = 1
         ```
+
+
+
+
+ 1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
+    please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
+
+    2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
+    to see how raster_base is created please refer to [STUDY AREA](#study_area) 
+    and for reducing the raster please see part I of the script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
+    
+    3. *Create raster of non tcd* :   
+        
         
     4. Exclude non forest trees from the TCD layer please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
 
