@@ -1,9 +1,10 @@
 This repository contains workflow and R codes to compute variables for depredation factor analysis between France and Italy.
 
-* [Study area](#Study-area)
-* [Landcover variables](#LandCover-covariates)
-* [Proportion computation](#compute-proportion-rasters)
-* [Nearest distance computation](#compute-nearest-distance-rasters)
+* [Study area](#Study-area)  
+* [Landcover variables](#LandCover-covariates)  
+* [Nearest distance computation](#compute-nearest-distance-rasters)  
+* [Proportion computation](#compute-proportion-rasters)  
+* [Pastoral covariates](#pastoral-covariates)  
 
 # Study area  
 
@@ -296,7 +297,7 @@ Please see script.
 
 To compute patch density (add description)
 
-## COMPUTE NEAREST DISTANCE TO FEATURE CELL
+# Compute nearest distance rasters
 
 1. package(raster) distance()  
 https://www.rdocumentation.org/packages/raster/versions/2.8-4/topics/distance
@@ -324,12 +325,9 @@ ok PavedRoads
 ok Track  
 ok Shrub    
 ok Building (OSM)
-Distance done
+Distance done  
 
- 
- 
-
-## COMPUTE PROPORTION OF LANDCOVER TYPE IN BUFFER
+# Compute proportion rasters
 
 Please see script Proportion.R
 (R::focal and R::focalWeight)
@@ -409,5 +407,5 @@ To predict at the pyrenees, we computed the mean of brown bear activity in QGis:
 ("Raster20_buf2000_2010OursAct@1" + "Raster20_buf2000_2011OursAct_nona@1" + "Raster20_buf2000_2012OursAct@1" + "Raster20_buf2000_2013OursAct@1" + "Raster20_buf2000_2014OursAct@1" + "Raster20_buf2000_2015OursAct@1" + "Raster20_buf2000_2016OursAct@1")/7
 ```
 
-
+# Pastoral covariates
 To do the next step of modeling with the pastoral activity, we divided the number of sheep per the area of the pasture (m2) in QGis, using the field calculator for vector layer (nb ovin/ area). The area was calculated with the geometry calculation in QGis
