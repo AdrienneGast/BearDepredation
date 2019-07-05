@@ -358,6 +358,10 @@ From visualization in QGis, some TCD >50% were inside grassland areas. In order 
 As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.  
 Please see script [Grassland.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/Grassland.R)
 
+9. **PATCH DENSITY as a fragmentation index**  
+
+To compute patch density (add description)
+
 ## COMPUTE NEAREST DISTANCE TO FEATURE CELL
 
 1. package(raster) distance()  
