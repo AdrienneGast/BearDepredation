@@ -29,60 +29,50 @@ Thus, we had computed:
 - [Bare Rocks](#bare-rocks-land-cover)
 - [Agricultural and artificial areas](#agriculture-and-artificial-areas)
 - [Grassland](#grassland-landcover-type-specification)  
+- [Shrubland](#shrub-and-transitional-woodland-shrub-area)  
 
 ## Tree Cover Density 
 
 The tree cover density (TCD) will allow us to compute nearest distance to forest. Thus, we keep attention to details for the forest areas but not for the type of forest. Thus, we exclude trees that are urban and agricultural trees, as they do not represent good quality habitat for bears as well as not a "wild" mountainous habitat.   
 
 1. Non forest raster:  
-        - From [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015), download the forest additional support layer (FADSL, E30N20, 20m resolution, LAEA)   
-        - Crop and mask the raster for the large area of analysis
-        But there is also vineyard that are not taken into account into FADSL (from quick visualization exploration)   
-        Then get CorineLandCover 2012 shapefile [CLC SHP](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
-        In QGis, select only vineyards (code_clc12 = 15 / 221),  
-        rasterize at 20m resolution to match FADSL layer   
-        then crop and mask at the Pyrenees large area of analysis (please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R))
-        
-        Then in QGis,   
-        A) load both raster layers FADSL and Vineyards (20m resolution, at Pyrenees large area)  
-        B) create a new raster 0/1 from the combination of those two rasters in rastor calculator (20m resolution, at Pyrenees large area, proj = +proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs)  
-        ```
-        "FASDL_maskrasterbase@1"  = 3  OR 
-        "FASDL_maskrasterbase@1"  = 4  OR 
-        "FASDL_maskrasterbase@1"  = 5 OR 
-        "vine_maskrasterbase@1" = 1
-        ```
-
-
-
-
- 1. From Copernicus download E30N20 raster for TCD at 20m resolution (2015)  
-    please see the [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015)
-
-    2. Reduce raster (crop and mask) to the large area of analysis (raster_base.tif)   
-    to see how raster_base is created please refer to [STUDY AREA](#study_area) 
-    and for reducing the raster please see part I of the script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
-    
-    3. *Create raster of non tcd* :   
-        
-        
-    4. Exclude non forest trees from the TCD layer please see part II of script [TCD.R](https://github.com/AdrienneGast/BearDepredation/blob/master/FR-IT/TCD.R)
-
-TCDtrue_largePYR.tif
+        - From [Copernicus website](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/forest-type-1/expert-products/forest-additional-support-layer/2015), download the forest additional support layer (FADSL, E30N20, 20m resolution, LAEA)and then crop and mask the raster for the large area of analysis
+=> Creation of FADSL raster layer  
+        - From [CorineLandCover 2012 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012), we select only vineyards ``` code_clc12 = 15 / 221 ```, and rasterize at 20m resolution to match raster layers. Then, we crop and mask this vineyard raster at the Pyrenees large area of analysis.
+=> Creation of the Vineyard raster layer
+        - Load FADSL and Vineyard raster layers in QGis (20m resolution, LAEA proj, large area)  
+        - Combine both rasters into one binary raster layer  of non(QGis::Raster Calculator) 
+          ```
+          "FASDL_maskrasterbase@1"  = 3  OR 
+          "FASDL_maskrasterbase@1"  = 4  OR 
+          "FASDL_maskrasterbase@1"  = 5 OR 
+          "vine_maskrasterbase@1" = 1
+          ```   
+ => Creation of non forest raster layer  
+ 
+ 2. Create tree cover density raster layer 
+        - Download [Copernicus TCD layer 2015](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015) for E30N20
+        - Crop and mask the TCD layer with the large area of analysis
+        - Exclude non forest trees from the TCD layer 
+=> Creation of the forest raster layer
 
 ## Agricultural trees
+   - Load the non forest raster layer [constructed before](#non-forest-raster)  
+   - Create a binar raster layer of agricultural trees by selecting only agricultural trees and vineyard in the previous raster (QGis::Raster Calculator) 
+   
+    ```"FASDL_maskrasterbase@1"  = 3  OR 
+    "vine_maskrasterbase@1" = 1```  
+    
+=> Creation of the agricultural trees raster layer
 
-    1. Get raster of FADSL at large Pyrenees and Vineyards at large Pyrenees
-    2. In QGis, create raster from raster calculation with 0/1 for only FASDL(code 3 agricultural trees) and vineyard (which is CLC(15) constructed before see non tcd raster before)
-   ```
-    "FASDL_maskrasterbase@1"  = 3  OR 
-    "vine_maskrasterbase@1" = 1
-    ```
-    => It brings fruit trees and vineyards (as agricultural trees) as one raster 0/1
+## Elevation
+ - Load [Copernicus DEM raster layer](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1) for E30N20. This raster is at 25m resolution
+ - Resample the elevation layer at 20m resolution with the bilinear method ("Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average.") at the large study area.
+ 
+ Slope and Ruggedness were derived from this layer thanks to the [*terrain()*](https://www.rdocumentation.org/packages/raster/versions/2.9-5/topics/terrain) function in R.
+  
 
-AgriTree_largePYR.tif
-
-3. **SHRUB OR TRANSITIONAL WOODLAND-SHRUB AREA**
+## Shrub and transitional woodland-shrub area  
 
     1. Get CorineLandCover 2012 shapefile [CLC SHP](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)
     2. Select only Shrub category (322, 323, 324 / code for transitional areas) in shapefile in QGis
