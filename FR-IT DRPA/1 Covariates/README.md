@@ -1,6 +1,6 @@
 This repository contains workflow and R codes to compute variables for depredation factor analysis between France and Italy.
 
-* [Study area](#study-area)
+* [Study area](#Study-area)
 * [Landcover variables](#LandCover-covariates)
 * [Grassland landcover type](#Grassland-LANDCOVER-TYPE-SPECIFICATION) 
 
@@ -21,8 +21,8 @@ Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearCon
 
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
 Thus, we had computed:
-- [Tree Cover Density](##**tree-cover-density**)  
-- [Agriculutural trees](##**agricultural-trees**)
+- [Tree Cover Density](##Tree-Cover-Density**)  
+- [Agriculutural trees](##Agricultural-trees**)
 
 ## Tree Cover Density 
 
