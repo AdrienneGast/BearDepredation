@@ -23,7 +23,7 @@ Thus, we had computed:
 - [Tree Cover Density](#tree-cover-density)  
 - [Agricultural trees](#agricultural-trees)
 - [Elevation and derived terrain index](#elevation)
-- [Buildings](#human-buildings-from-national-cadastre)
+- [Buildings](#human-buildings)
 - [Roads](#roads)
 - [Waterbodies](#waterbodies-and-waters)
 - [Bare Rocks](#bare-rocks-land-cover)
@@ -71,7 +71,7 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
  
  Slope and Ruggedness were derived from this layer thanks to the [*terrain()*](https://www.rdocumentation.org/packages/raster/versions/2.9-5/topics/terrain) function in R (with neighbors=8 for rough terrain).
 
-5. **HUMAN BUILDINGS FROM NATIONAL CADASTRE**
+## Human buildings  
 
 At first, the use of the [European Settlement Map from Copernicus](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green) seems handy. However, after thorough visualization on both areas (Pyrenees and Alps), we identified some discrepancies in natural areas. For example, as the ESM is from remote sensing computation in some areas it qualified a rock as a building. Thus, we chose to extract national cadastral information from [Open Street Map (OSM)](https://www.openstreetmap.org/#map=5/46.449/2.210).  
 
