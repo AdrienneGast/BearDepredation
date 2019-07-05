@@ -23,6 +23,13 @@ We first compute landscape rasters from which we will calculate nearest distance
 Thus, we had computed:
 - [Tree Cover Density](#tree-cover-density)  
 - [Agricultural trees](#agricultural-trees)
+- [Elevation and derived terrain index](#elevation)
+- [Buildings](#human-buildings-from-national-cadastre)
+- [Roads](#roads)
+- [Waterbodies](#waterbodies-and-waters)
+- [Bare Rocks](#bare-rocks-land-cover)
+- [Agricultural and artificial areas](#agriculture-and-artificial-areas)
+- [Grassland](#grassland-landcover-type-specification)  
 
 ## Tree Cover Density 
 
