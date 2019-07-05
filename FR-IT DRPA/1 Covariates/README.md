@@ -42,12 +42,12 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
 => Creation of the Vineyard raster layer
         - Load FADSL and Vineyard raster layers in QGis (20m resolution, LAEA proj, large area)  
         - Combine both rasters into one binary raster layer  of non(QGis::Raster Calculator)    
-          ```
-          "FASDL_maskrasterbase@1"  = 3  OR 
-          "FASDL_maskrasterbase@1"  = 4  OR 
-          "FASDL_maskrasterbase@1"  = 5 OR 
-          "vine_maskrasterbase@1" = 1
-          ```      
+```
+"FASDL_maskrasterbase@1"  = 3  OR   
+"FASDL_maskrasterbase@1"  = 4  OR   
+"FASDL_maskrasterbase@1"  = 5 OR   
+"vine_maskrasterbase@1" = 1  
+```      
  => Creation of non forest raster layer  
  
  2. Create tree cover density raster layer   
