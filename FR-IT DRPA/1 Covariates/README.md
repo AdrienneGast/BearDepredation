@@ -31,6 +31,7 @@ Thus, we had computed:
 - [Agricultural and artificial areas](#agricultural-and-artificial-areas)
 - [Grassland](#grassland)  
 - [Shrubland](#shrub-and-transitional-woodland-shrub-area)  
+- [Patch Density](#patch-density-as-a-fragmentation-index)  
 
 ## Tree Cover Density 
 
