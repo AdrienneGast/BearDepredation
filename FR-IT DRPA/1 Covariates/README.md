@@ -21,8 +21,8 @@ Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearCon
 
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
 Thus, we had computed:
-- [Tree Cover Density](##tree-Cover-Density)  
-- [Agricultural trees](##agricultural-trees)
+- [Tree Cover Density](#tree-cover-density)  
+- [Agricultural trees](#agricultural-trees)
 
 ## Tree Cover Density 
 
