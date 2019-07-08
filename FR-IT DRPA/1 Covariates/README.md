@@ -3,7 +3,8 @@ This repository contains workflow and R codes to compute variables for depredati
 * [Study area](#Study-area)  
 * [Landcover variables](#LandCover-covariates)  
 * [Nearest distance computation](#compute-nearest-distance-rasters)  
-* [Proportion computation](#compute-proportion-rasters)  
+* [Proportion computation](#compute-proportion-rasters)    
+* [Brown bear activity](#compute-brown-bear-activity-density-covariate)  
 * [Pastoral covariates](#pastoral-covariates)  
 
 # Study area  
@@ -301,7 +302,44 @@ The next steps are developed in the script R.
 
 # Compute nearest distance rasters
 
-1. package(raster) distance()  
+Those kind of calculations can be done both on GIS softwares (as QGis) and R. However, the fastest computation is in QGis as it ias designed to handle spatial layers. Thus, we computed the nearest distance to feature cell with QGis (QGis::Proximity(distance raster)).    
+**Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.**    
+The cells that are at 0m distance are the cells containing the feature (so the closest)!   
+
+ok TCD ALPS / PYRENEES
+ok AgriTree ALPS / PYRENEES 
+ok FootTrails ALPS / PYRENEES  
+ok Waterbodies ALPS / PYRENEES 
+ok PavedRoads ALPS / PYRENEES
+ok Track ALPS / PYRENEES  
+ok Shrub ALPS / PYRENEES    
+ok Building (OSM) ALPS / PYRENEES
+
+
+# Compute proportion rasters
+
+It is not fastest in R however, the computation was easiest. :)  
+Please see script Proportion.R
+(R::focal and R::focalWeight)
+
+Radius define as 250m (buffer of radius 250m) to have a proportion of cell that are the feature around each focal cell (proportion of feature neighbor)
+ 
+
+# Compute Brown Bear Activity Density covariate
+*Brown bear activity for the complete period*
+To predict at the pyrenees, we computed the mean of brown bear activity in QGis::RastorCalculator as:
+```
+("Raster20_buf2000_2010OursAct@1" + "Raster20_buf2000_2011OursAct_nona@1" + "Raster20_buf2000_2012OursAct@1" + "Raster20_buf2000_2013OursAct@1" + "Raster20_buf2000_2014OursAct@1" + "Raster20_buf2000_2015OursAct@1" + "Raster20_buf2000_2016OursAct@1")/7
+```
+
+# Pastoral covariates
+To do the next step of modeling with the pastoral activity, we divided the number of sheep per the area of the pasture (m2) in QGis, using the field calculator for vector layer (nb ovin/ area). The area was calculated with the geometry calculation in QGis
+
+
+
+**Some random notes**
+
+**package(raster)**  *function distance()*  
 https://www.rdocumentation.org/packages/raster/versions/2.8-4/topics/distance
 
 First option: Compute distance to nearest cell that is not NA (that contains the category we are interested in).  
@@ -315,45 +353,21 @@ First option: Compute distance to nearest cell that is not NA (that contains the
               ```
               their distance if 0 because they are the targeted category.
 
-2. **Proximity (distance raster) QGis**
+*boundaries() in package raster
+*click()* : Click on a map (plot) to get values
+*clump()* : Detect patches of connected cells
+*cv()* : Compute the coefficient of variation (expressed as a percentage)
+*density()* : Create density plots
+[*distanceFromPoints()*](https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints)  
+*canProcessInMemory() 
+*resample()* : Before using resample, you may want to consider using these other functions instead: aggregate, disaggregate, crop, extend, merge. 
+*buffer()*
+*focal()*
 
-It is faster than in R. Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.
-The cells that are at 0m distance are the cells containing the feature (so the closest)!  
-ok TCD  
-ok AgriTree  
-ok FootTrails  
-ok Waterbodies  
-ok PavedRoads
-ok Track  
-ok Shrub    
-ok Building (OSM)
-Distance done  
+**package(proxy)** [*function dist()*](https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist)
 
-# Compute proportion rasters
-
-Please see script Proportion.R
-(R::focal and R::focalWeight)
-
-Radius define as 250m (buffer of radius 250m) to have a proportion of cell that are the feature around each focal cell (proportion of feature neighbor)
- 
-
-
-
-
-## Some notes:
-* boundaries() in package raster
-* click() in package raster Click on a map (plot) to get values
-* clump() in package raster detect patches of connected cells
-* cv() in package raster Compute the coefficient of variation (expressed as a percentage
-* density() in package raster create density plots
-* **package(raster)** **distanceFromPoints()
-https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints
-
-* package(proxy) dist()  
-https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist
-
-* **package(regos)** **gDistance()**  
-https://www.rdocumentation.org/packages/rgeos/versions/0.4-2/topics/gDistance
+**package(regos)** [*function gDistance()*](https://www.rdocumentation.org/packages/rgeos/versions/0.4-2/topics/gDistance)  
+Code example:  
  ```
 library(raster)
 m <- matrix(4,10)
@@ -385,29 +399,15 @@ plot(mr)
 plot(da,add=T)
  ```  
  
-* **package(spdep)** **dnearneigh**
-https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh
+**package(spdep)** [*function dnearneigh()*](https://www.rdocumentation.org/packages/spdep/versions/0.8-1/topics/dnearneigh)
 
-* package(geosphere) dist2Line()
-https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line
-
-* canProcessInMemory() in package raster
-
-Before using resample, you may want to consider using these other functions instead:
-aggregate, disaggregate, crop, extend, merge. 
-
-## PROPORTION
-
-* **package(raster)** **buffer()**
-* **package(raster)** **focal()**
+**package(geosphere)** [*dist2Line()*](https://www.rdocumentation.org/packages/geosphere/versions/1.5-5/topics/dist2Line)
 
 
 
-*Brown bear activity for the complete period*
-To predict at the pyrenees, we computed the mean of brown bear activity in QGis::RastorCalculator as:
-```
-("Raster20_buf2000_2010OursAct@1" + "Raster20_buf2000_2011OursAct_nona@1" + "Raster20_buf2000_2012OursAct@1" + "Raster20_buf2000_2013OursAct@1" + "Raster20_buf2000_2014OursAct@1" + "Raster20_buf2000_2015OursAct@1" + "Raster20_buf2000_2016OursAct@1")/7
-```
 
-# Pastoral covariates
-To do the next step of modeling with the pastoral activity, we divided the number of sheep per the area of the pasture (m2) in QGis, using the field calculator for vector layer (nb ovin/ area). The area was calculated with the geometry calculation in QGis
+
+
+
+
+
