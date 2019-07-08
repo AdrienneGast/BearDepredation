@@ -104,8 +104,9 @@ The extraction might take time and has to been done in several parts for large a
    
 *The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*
 
-   - Buffer the polygon of the building vector layer to ease the rasterization (GRASS::v.buffer)
-   - Rasterize the previous layer (merged buffered building layer) at 20m resolution at the large study area (projection LAEA)
+   - Buffer the polygon of the building vector layer to ease the rasterization (GRASS::v.buffer with d=0)
+   - Dissolve the polygon thanks to the NewField equal to 1 (GRASS::v.dissolve)
+   - Rasterize the previous layer (dissolved buffered and merged building layer) at 20m resolution at the large study area (projection LAEA)
 After rasterizing the OSM national cadastral information we did another visualization check for discrepancies. Even though, there are still some differences it is less obvious and they are less numerous. 
 
 => Creation of Buildings raster layer.
