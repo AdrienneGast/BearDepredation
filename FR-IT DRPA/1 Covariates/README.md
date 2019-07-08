@@ -353,16 +353,16 @@ First option: Compute distance to nearest cell that is not NA (that contains the
               ```
               their distance if 0 because they are the targeted category.
 
-*boundaries() in package raster
-*click()* : Click on a map (plot) to get values
-*clump()* : Detect patches of connected cells
-*cv()* : Compute the coefficient of variation (expressed as a percentage)
-*density()* : Create density plots
-[*distanceFromPoints()*](https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints)  
-*canProcessInMemory() 
-*resample()* : Before using resample, you may want to consider using these other functions instead: aggregate, disaggregate, crop, extend, merge. 
-*buffer()*
-*focal()*
+*boundaries()*   
+*click()* : Click on a map (plot) to get values   
+*clump()* : Detect patches of connected cells   
+*cv()* : Compute the coefficient of variation (expressed as a percentage)   
+*density()* : Create density plots   
+[*distanceFromPoints()*](https://www.rdocumentation.org/packages/raster/versions/2.1-41/topics/distanceFromPoints)     
+*canProcessInMemory()*     
+*resample()* : Before using resample, you may want to consider using these other functions instead: aggregate, disaggregate, crop, extend, merge.   
+*buffer()*  
+*focal()*   
 
 **package(proxy)** [*function dist()*](https://www.rdocumentation.org/packages/proxy/versions/0.4-22/topics/dist)
 
