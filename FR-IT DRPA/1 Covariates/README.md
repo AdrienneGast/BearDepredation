@@ -296,7 +296,8 @@ Please see script.
 
 ## Patch density as a fragmentation index  
 
-To compute patch density (add description)
+To compute patch density and to ease and speed calculations of this fragmentation index, we used the [CorineLandCover raster file at 100 m resolution for 2012](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012) (as our study period is from 2010 to 2017).
+The next steps are developed in the script R (first, choose for forests and create a binary rasters then resample at 250m resolution)
 
 # Compute nearest distance rasters
 
