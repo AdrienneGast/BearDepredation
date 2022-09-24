@@ -43,17 +43,9 @@ Thus, we had computed:
 - [Agricultural and artificial areas](#agricultural-and-artificial-areas)
 - [Grassland](#grassland)  
 - [Shrubland](#shrub-and-transitional-woodland-shrub-area)  
-
-
 - [Agricultural trees](#agricultural-trees)
-
 - [Buildings](#human-buildings)
 - [Roads](#roads)
-
-
-
-
-
 - [Patch Density](#patch-density-as-a-fragmentation-index)  
 
 
@@ -383,7 +375,7 @@ The next steps are developed in the script R.
 
 # Compute nearest distance rasters
 
-Those kind of calculations can be done both on GIS softwares (as QGis) and R. However, the fastest computation is in QGis as it ias designed to handle spatial layers. Thus, we computed the nearest distance to feature cell with QGis (QGis::Proximity(distance raster)).    
+Those kind of calculations can be done both on GIS softwares (as QGis) and R. However, the fastest computation is in QGis as it is designed to handle spatial layers. Thus, we computed the nearest distance to feature cell with QGis (QGis::Proximity(distance raster)).    
 **Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.**    
 The cells that are at 0m distance are the cells containing the feature (so the closest)!   
 
