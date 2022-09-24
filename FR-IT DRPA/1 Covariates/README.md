@@ -379,14 +379,14 @@ Those kind of calculations can be done both on GIS softwares (as QGis) and R. Ho
 **Compute all the distances from each centroid of cell to nearest target values cell, i.e. here compute the distance between cell value 0 to nearest cell value != 0.**    
 The cells that are at 0m distance are the cells containing the feature (so the closest)!   
 
-ok TCD ALPS / PYRENEES
-ok AgriTree ALPS / PYRENEES 
-ok FootTrails ALPS / PYRENEES  
-ok Waterbodies ALPS / PYRENEES 
-ok PavedRoads ALPS / PYRENEES
-ok Track ALPS / PYRENEES  
-ok Shrub ALPS / PYRENEES    
-ok Building (OSM) ALPS / PYRENEES
+ok TCD ALPS / PYRENEES  
+ok AgriTree ALPS / PYRENEES   
+ok FootTrails ALPS / PYRENEES    
+ok Waterbodies ALPS / PYRENEES   
+ok PavedRoads ALPS / PYRENEES  
+ok Track ALPS / PYRENEES    
+ok Shrub ALPS / PYRENEES      
+ok Building (OSM) ALPS / PYRENEES  
 
 
 # Compute proportion rasters
