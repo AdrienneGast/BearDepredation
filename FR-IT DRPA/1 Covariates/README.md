@@ -13,27 +13,59 @@ This repository contains workflow and R codes to compute variables for depredati
 
 The Pyrenees are a large mountain chain ranging from France to Spain and Andorra. Those mountains are separated from others, such as the Cantabrian, and are thus containing an isolated brown bear population. Thus, we chose an area large enough to contain all the brown bear range and possible dispersal areas in order to be able to predict at large scale even in areas not yeat colonized by brown bears.
 
-(add an image)
+(add an image with script giving the image shp)
 
 ## Alps study area  
 
 Please refer to [Andrea's GitHub page](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)   
+
+
+
+For ecological and management reasons, the study area in the Alps has been selected accroding to the following criteria:
+
+1. An area large enough to produce biologically meaningful results (Center/Eastern Alps);
+2. An area environmentally meaningful for the presence (and future expansion) of the bear (Alpine Convention area);
+3. An area administratively homogeneous (Italy).
+For these reasons, the area selected is the intersection between the Alpine Convetion area, and the Italian regions of Lombardia, Trentino Alto Adige, Veneto e Friuli Venezia Giulia. The generated shapefile is found here
+
+(add an image with script giving the image shp)
+
+A buffer of 5 km is built around the study area, in order to avoid the 'edge effect' while calculating distances from land types (i.e. human settlments just outside the study area will not be seen without a buffer). The buffer has been calcualted with the QGIS buffer function, with a buffer distance set to 5000 m.
   
 # Landcover covariates
 
 We first compute landscape rasters from which we will calculate nearest distances and proportions.
 Thus, we had computed:
-- [Tree Cover Density](#tree-cover-density)  
-- [Agricultural trees](#agricultural-trees)
 - [Elevation and derived terrain index](#elevation)
-- [Buildings](#human-buildings)
-- [Roads](#roads)
-- [Waterbodies](#waterbodies-and-rivers)
+- [Tree Cover Density](#tree-cover-density)  
 - [Bare Rocks](#bare-rocks)
+- [Waterbodies](#waterbodies-and-rivers)
 - [Agricultural and artificial areas](#agricultural-and-artificial-areas)
 - [Grassland](#grassland)  
 - [Shrubland](#shrub-and-transitional-woodland-shrub-area)  
+
+
+- [Agricultural trees](#agricultural-trees)
+
+- [Buildings](#human-buildings)
+- [Roads](#roads)
+
+
+
+
+
 - [Patch Density](#patch-density-as-a-fragmentation-index)  
+
+
+## Elevation
+
+ - Load [Copernicus DEM raster layer](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1) for E30N20. This raster is at 25m resolution
+ - Resample the elevation layer at 20m resolution with the bilinear method ("Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average.") at the large study area.
+ 
+ Slope and Ruggedness were derived from this layer thanks to the [*terrain()*](https://www.rdocumentation.org/packages/raster/versions/2.9-5/topics/terrain) function in R (with neighbors=8 for rough terrain).
+ 
+(andrea) The elevation has been derived from the EU Digital Elevation Model. All the corresponding derived variables (slope, aspect, etc) are derived with the function terrain() in the package raster.
+
 
 ## Tree Cover Density 
 
@@ -45,7 +77,7 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
         - From [CorineLandCover 2012 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012), we select only vineyards ``` code_clc12 = 15 / 221 ```, and rasterize at 20m resolution to match raster layers. Then, we crop and mask this vineyard raster at the Pyrenees large area of analysis.
 => Creation of the Vineyard raster layer
         - Load FADSL and Vineyard raster layers in QGis (20m resolution, LAEA proj, large area)  
-        - Combine both rasters into one binary raster layer  of non forest trees (QGis::Raster Calculator)        
+        - Combine both rasters into one binary raster layer of *non forest trees* (QGis::Raster Calculator)        
 ```
 "FASDL_maskrasterbase@1"  = 3  OR   
 "FASDL_maskrasterbase@1"  = 4  OR   
@@ -57,8 +89,208 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
  2. Create tree cover density raster layer   
         - Download [Copernicus TCD layer 2015](https://land.copernicus.eu/pan-european/high-resolution-layers/forests/tree-cover-density/status-maps/2015) for E30N20  
         - Crop and mask the TCD layer with the large area of analysis  
-        - Exclude non forest trees from the TCD layer (add script)      
+        - Exclude non forest trees from the TCD layer 
 => Creation of the forest raster layer
+
+
+(andrea)
+The forest presence in the landscape has been derived using the Copernicus forest layers (tile E40N20) and the Corine Land Cover vector data. In detail:
+
+Tree cover density (TCD), Forest type product (FTY), and Corine Land Cover (CLC) vector layers are downloaded for the reference area;
+
+The CLC vector is rasterized to match the Copernicus resolution (20 m);
+
+Given the aim of the study, two layers have been derived:
+
+Agricultural Forest Cover: Using the QGIS raster calculator, the layer is generated accounting for both orchards and olive tree as derived from the FTY layer (x = 3), and the vineyards as derived form CLC layer (x = 221):
+```
+CLC@1" = 221  OR "FTY@1" = 3   
+```
+
+Non-urban and non-agricultural Tree Cover Density: First, using the QGIS raster calculator and the procedure above-mentioned, a layer of all the urban and agricultural tree cover is generated. In detail, we considered in the FTY layer the orchards and olive tree (x = 3), as well as the urban trees (x = 4, 5). To account for vineyards, we included the corresponding class of CLC (x = 221). Hence, we generated the new layer (say non_forest_TCD) of urban and agricultural tree cover:
+```
+CLC@1" = 221  OR "FTY@1" = 3  OR "FTY@1" = 4  OR "FTY@1" = 5 
+```
+Using the GRASS raster calculator r.mapcalc, we 'clip' the TCD taking into account only non-urban and non-agricultural tree associations.
+
+```
+new_map = not(if(non_forest_TCD)) * TCD
+```
+With the following function, if non_forest_TCD is NOT 1 (i.e. 0), then it returns 1, which is then multiplied by percentage of cover. The resulting map is a Tree Cover Density (0 to 100) without non-urban and non-agricultural tree associations.
+
+
+## Bare rocks    
+
+- Extract from [OSM data overpass turbo](https://overpass-turbo.eu/) the rocky structure of our mountainous areas (Alps and Pyrenees). Thanks to the decription provided on the [wiki page](https://wiki.openstreetmap.org/wiki/Tag%3Anatural%3Dbare_rock), we choose to extract OSM data for bare_rock, scree, glacuer, cliff, stone, and rock and do a visual exploration for each study area. As before, the code is provided below and you should change the word "bare_rock" to the other categories. 
+```
+/*
+This has been generated by the overpass-turbo wizard.
+The original search was:
+“natural=bare_rock”
+*/
+[out:json][timeout:2500];
+// gather results
+(
+  // query part for: “natural=bare_rock”
+  node["natural"="bare_rock"]({{bbox}});
+  way["natural"="bare_rock"]({{bbox}});
+  relation["natural"="bare_rock"]({{bbox}});
+);
+// print results
+out body;
+>;
+out skel qt;
+```
+From visual exploration, we will not use: a) stone because screen contains it, b) rock because it is not the type of rocks we are looking for, i.e. bare rocks on top of mountains, rather than those are in forest area and c) cliff will be extracted only for the Italian Alps.    
+
+*same process than [Buildings](#human-buildings) for each category*   
+- Merge all the extracted OSM data to create a shapefile of each rock category. To do so, we combine all the rock GeoJson files for each category (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers).   
+*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*    
+
+- Merge then all the vector layers (categories bare_rock, screen, glacier) into one vector layer (QGis::MergeVectorLayers)    
+- Rasterize the total rock vector layer at 20m resolution for the large study area Pyrenees (GRASS::v.to.rast.value)     
+*this raster will only be used for creating a well-defined grassland raster layer.*    
+
+=> Creation of the Bare Rock raster layer  
+
+(andrea) add better description => So we can use mine
+
+
+## Waterbodies and rivers  
+
+- Download the [Copernicus folder for Garonne, Ebro, and Rhone](https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015)".  
+- Select only InlandWater and River_Net_I (QGis)   
+- Create a new field for both vector layers (QGis::Field Calculator) and suppress the other fields  
+- Merge for the three areas the two vector types separatly (inland and river, QGis::MergeVectorLayers)  
+- Rasterize both shapefiles independently (GRASS::v.to.rast.value) at 20m resolution for the large study area (LAEA projection)  
+=> Creation of two rasters one of inland water and another of rivers  
+      
+- Extract From [OpenStreet Map data](https://overpass-turbo.eu/) the waterbodies with [the provided code natural=water](https://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater):     
+ ```
+ /*
+    This has been generated by the overpass-turbo wizard.
+    The original search was:
+    “natural=bare_rock”
+    */
+    [out:json][timeout:2500];
+    // gather results
+    (
+    // query part for: “"highway"="path"”       
+    node["natural"="water"]({{bbox}});           # the bbox is defined by hand on the website
+    way["natural"="water"]({{bbox}});            # it is very large files to compute so we cut the area into several files
+    relation["natural"="water"]({{bbox}});
+    );
+    // print results
+    out body;
+    >;
+    out skel qt;
+```  
+*same process than [Buildings](#human-buildings) for each category*   
+- Merge all the extracted OSM data to create a shapefile of waterbodies. To do so, we combine all the waterbodies GeoJson files (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers).   
+*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*  
+
+- Rasterize the waterbodies OSM shapefile at 20m resolution over the large area (GRASS::v.to.rast.value)  
+
+Thus we have two things:  
+- Inland water raster layer from Copernicus and OSM data. We merge the two raster layers (GRASS::r.patch). *this raster will be used to clip the grassland raster*  
+- Waterbodies complete raster layer with both inland waters and rivers. We merge (GRASS::r.patch) the previous raster layer of inland water (Copernicus+OSM) and the rivers (Copernicus) at 20m resolution for the large study area (LAEA projection).  
+
+=> Creation of the Waterbodies020m_largePYR.tif that combines inland waters and rivers net from both copernicus shapefile EU-Hydro and Open Street Map data for lakes (more precise).  
+
+(andrea)
+(add better description)
+
+The water bodies were retrived from two different sources: EU-Hydro and Open Street Map. The first source contains the complete network of rivers and lakes for the main European watersheds (Danube, Po, etc), while the second source contains a detailed mapping of the inland water bodies (lakes). We paired the OpenStreetMap data with the EU dataset because the accurancy for the inland water body was higher. This information was thus used for retrive the water bodies distributuion in the reference area, as well as crop all the 'noise' derived from the water bodies within pastures.
+
+Inland Water
+
+The OSM data is downloaded (GeoJSON file);
+A new column containing the value 1 (as integer) is generated for the subsequent rasterization;
+The layers are merged using the 'Merge vector layers' function...
+The layer is rasterized...
+The generated layer is clipped by mask layer (the bufferede reference area)
+Ready to go...
+River_net_I 1.
+
+
+## Agricultural and artificial areas
+
+After having visualize the ESM map with all the other layers (mostly grassland, shrub, tcd, roads), we realize there were some areas that were not defined well in comparison with the satellite picture. As such, near villages, some agricultural lands were defined as grassland. However, in CLC12 those were defined as agricultural and/or artificial areas. And those areas are not in moutainous areas and do not represent mountainous grazing pastures. Thus, in order to produce a map of grassland with the less noise possible. *the raster created below will only be used for creating a well-defined grassland raster layer.*    
+We decided to rerasterize the agricultural and artificial areas of CLC12 at 20m to exclude them from the grassland. However, it would not have been a problem for modeling, it could have increased the noise for prediction!      
+
+- Select for agricultural and artificial areas in [CLC12 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012) for the large study area (of course vineyards, fruit trees and pastures have been excluded from this selection as they already have been used for other raster layers and definition):  
+    
+```
+"code_12"  = '111' OR 
+"code_12"  = '112' OR
+"code_12"  = '121' OR
+"code_12"  = '122' OR
+"code_12"  = '123' OR
+"code_12"  = '124' OR
+"code_12"  = '131' OR
+"code_12"  = '132' OR
+"code_12"  = '133' OR
+"code_12"  = '141' OR
+"code_12"  = '142' OR
+"code_12"  = '211' OR
+"code_12"  = '212' OR
+"code_12"  = '213' OR
+"code_12"  = '223' OR
+"code_12"  = '241' OR
+"code_12"  = '242' OR
+"code_12"  = '243' OR
+"code_12"  = '244'
+```  
+- Rasterize (GRASS:v.to.rast.value) the artificial and agricultural vector layer at 20m resolution for the large study area.  
+
+=> Creation of the Agricultural and Artificial raster layer     
+
+(andrea) no description
+
+
+## Grassland  
+
+**Grassland raster layer = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas - TCDcut**
+*Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.*
+
+Compute Grassland cover from Shapefile of CLC and Copernicus
+ 
+- Select grassland in the [CLC12 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012):  
+```
+"code_12"  = '231' OR
+"code_12"  = '321' OR
+"code_12" ='333'
+```  
+
+- Rasterize (GRASS::v.to.rast.value) the CLC grassland shapefile created above at 20m resolution for the large study area (projection LAEA).   
+
+- Merge the two layers of grassland (from CLC(231,321,333) and [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps)) (GRASS::r.patch)  
+
+- Clip Grassland layer with the [Inland waterbodies](#waterbodies-and-rivers)    
+
+- Clip Grassland layer with the [Bare Rock layer](#bare-rocks)  
+
+- Clip Grassland with [forest layer](#tree-cover-density)    
+
+From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to exclude cells that are TCD>0 from grassland layer.    
+As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.    
+Please see script.  
+ 
+(andrea) add better description so use this one is ok
+
+## Shrub and transitional woodland-shrub area    
+
+- Select Shrub category (322, 323, 324) in the [CLC 2012 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
+```  
+"code_12"  = '324' OR
+"code_12"  = '323' OR
+"code_12" ='322'
+```   
+- Rasterize (GRASS::v.to.rast.value) the shrubland shapefile at 20m resolution for the large study area (LAEA projection) (please see script)   
+- Clip (exclude) [forest layer](#tree-cover-density) from the shrub raster (please see script) to create the transitional area  
+- Clip (exclude) [Grassland](#grassland) to create true transitional area  
+
+=> Creation of the shrubland layer    
 
 ## Agricultural trees
    - Load the non forest raster layer [constructed before](#non-forest-raster)  
@@ -69,11 +301,8 @@ The tree cover density (TCD) will allow us to compute nearest distance to forest
     
 => Creation of the agricultural trees raster layer
 
-## Elevation
- - Load [Copernicus DEM raster layer](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1) for E30N20. This raster is at 25m resolution
- - Resample the elevation layer at 20m resolution with the bilinear method ("Bilinear interpolation is a technique for calculating values of a grid location-based on nearby grid cells. The key difference is that it uses the FOUR closest cell centers. Using the four nearest neighboring cells, bilinear interpolation assigns the output cell value by taking the weighted average.") at the large study area.
- 
- Slope and Ruggedness were derived from this layer thanks to the [*terrain()*](https://www.rdocumentation.org/packages/raster/versions/2.9-5/topics/terrain) function in R (with neighbors=8 for rough terrain).
+(andrea) add better description so we can use mine
+
 
 ## Human buildings  
 
@@ -146,154 +375,6 @@ As described for [Buildings](#human-buildings), the extraction is done in severa
 
 => Creation of Roads raster layer and Foot trails raster layer.     
 
-## Waterbodies and rivers  
-
-- Download the [Copernicus folder for Garonne, Ebro, and Rhone](https://land.copernicus.eu/pan-european/high-resolution-layers/water-wetness/status-maps/2015)".  
-- Select only InlandWater and River_Net_I (QGis)   
-- Create a new field for both vector layers (QGis::Field Calculator) and suppress the other fields  
-- Merge for the three areas the two vector types separatly (inland and river, QGis::MergeVectorLayers)  
-- Rasterize both shapefiles independently (GRASS::v.to.rast.value) at 20m resolution for the large study area (LAEA projection)  
-=> Creation of two rasters one of inland water and another of rivers  
-      
-- Extract From [OpenStreet Map data](https://overpass-turbo.eu/) the waterbodies with [the provided code natural=water](https://wiki.openstreetmap.org/wiki/Tag:natural%3Dwater):     
- ```
- /*
-    This has been generated by the overpass-turbo wizard.
-    The original search was:
-    “natural=bare_rock”
-    */
-    [out:json][timeout:2500];
-    // gather results
-    (
-    // query part for: “"highway"="path"”       
-    node["natural"="water"]({{bbox}});           # the bbox is defined by hand on the website
-    way["natural"="water"]({{bbox}});            # it is very large files to compute so we cut the area into several files
-    relation["natural"="water"]({{bbox}});
-    );
-    // print results
-    out body;
-    >;
-    out skel qt;
-```  
-*same process than [Buildings](#human-buildings) for each category*   
-- Merge all the extracted OSM data to create a shapefile of waterbodies. To do so, we combine all the waterbodies GeoJson files (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers).   
-*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*  
-
-- Rasterize the waterbodies OSM shapefile at 20m resolution over the large area (GRASS::v.to.rast.value)  
-
-Thus we have two things:  
-- Inland water raster layer from Copernicus and OSM data. We merge the two raster layers (GRASS::r.patch). *this raster will be used to clip the grassland raster*  
-- Waterbodies complete raster layer with both inland waters and rivers. We merge (GRASS::r.patch) the previous raster layer of inland water (Copernicus+OSM) and the rivers (Copernicus) at 20m resolution for the large study area (LAEA projection).  
-
-=> Creation of the Waterbodies020m_largePYR.tif that combines inland waters and rivers net from both copernicus shapefile EU-Hydro and Open Street Map data for lakes (more precise).  
-
-## Bare rocks    
-
-- Extract from [OSM data overpass turbo](https://overpass-turbo.eu/) the rocky structure of our mountainous areas (Alps and Pyrenees). Thanks to the decription provided on the [wiki page](https://wiki.openstreetmap.org/wiki/Tag%3Anatural%3Dbare_rock), we choose to extract OSM data for bare_rock, scree, glacuer, cliff, stone, and rock and do a visual exploration for each study area. As before, the code is provided below and you should change the word "bare_rock" to the other categories. 
-```
-/*
-This has been generated by the overpass-turbo wizard.
-The original search was:
-“natural=bare_rock”
-*/
-[out:json][timeout:2500];
-// gather results
-(
-  // query part for: “natural=bare_rock”
-  node["natural"="bare_rock"]({{bbox}});
-  way["natural"="bare_rock"]({{bbox}});
-  relation["natural"="bare_rock"]({{bbox}});
-);
-// print results
-out body;
->;
-out skel qt;
-```
-From visual exploration, we will not use: a) stone because screen contains it, b) rock because it is not the type of rocks we are looking for, i.e. bare rocks on top of mountains, rather than those are in forest area and c) cliff will be extracted only for the Italian Alps.    
-
-*same process than [Buildings](#human-buildings) for each category*   
-- Merge all the extracted OSM data to create a shapefile of each rock category. To do so, we combine all the rock GeoJson files for each category (extracted from overpass turbo), create a unique new field with the value 1 (QGis::Field Calculator), suppress all the other field for each vector layer (attribute table), reproject the shapefile into LAEA projection (EPSG+3035, QGis::Reproject layer), then merge the vector layers created (SAGA::MergeVectorLayers).   
-*The process described above is going to be repeated several times for several different covariates and thus can be computed sometimes in QGis and sometimes in R.*    
-
-- Merge then all the vector layers (categories bare_rock, screen, glacier) into one vector layer (QGis::MergeVectorLayers)    
-- Rasterize the total rock vector layer at 20m resolution for the large study area Pyrenees (GRASS::v.to.rast.value)     
-*this raster will only be used for creating a well-defined grassland raster layer.*    
-
-=> Creation of the Bare Rock raster layer  
-
-## Agricultural and artificial areas
-
-After having visualize the ESM map with all the other layers (mostly grassland, shrub, tcd, roads), we realize there were some areas that were not defined well in comparison with the satellite picture. As such, near villages, some agricultural lands were defined as grassland. However, in CLC12 those were defined as agricultural and/or artificial areas. And those areas are not in moutainous areas and do not represent mountainous grazing pastures. Thus, in order to produce a map of grassland with the less noise possible. *the raster created below will only be used for creating a well-defined grassland raster layer.*    
-We decided to rerasterize the agricultural and artificial areas of CLC12 at 20m to exclude them from the grassland. However, it would not have been a problem for modeling, it could have increased the noise for prediction!      
-
-- Select for agricultural and artificial areas in [CLC12 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012) for the large study area (of course vineyards, fruit trees and pastures have been excluded from this selection as they already have been used for other raster layers and definition):  
-    
-```
-"code_12"  = '111' OR 
-"code_12"  = '112' OR
-"code_12"  = '121' OR
-"code_12"  = '122' OR
-"code_12"  = '123' OR
-"code_12"  = '124' OR
-"code_12"  = '131' OR
-"code_12"  = '132' OR
-"code_12"  = '133' OR
-"code_12"  = '141' OR
-"code_12"  = '142' OR
-"code_12"  = '211' OR
-"code_12"  = '212' OR
-"code_12"  = '213' OR
-"code_12"  = '223' OR
-"code_12"  = '241' OR
-"code_12"  = '242' OR
-"code_12"  = '243' OR
-"code_12"  = '244'
-```  
-- Rasterize (GRASS:v.to.rast.value) the artificial and agricultural vector layer at 20m resolution for the large study area.  
-
-=> Creation of the Agricultural and Artificial raster layer     
-
-## Grassland  
-
-**Grassland raster layer = CLC(231,321,333) + copernicus(grassland) - Barerocks - waterbodies - artificial and agricultural areas - TCDcut**
-*Remark: roads can be in grassland. That is okay. I can be in grassland and have a distance = 0 to a foot trail for example because it crosses the area.*
-
-Compute Grassland cover from Shapefile of CLC and Copernicus
- 
-- Select grassland in the [CLC12 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012):  
-```
-"code_12"  = '231' OR
-"code_12"  = '321' OR
-"code_12" ='333'
-```  
-
-- Rasterize (GRASS::v.to.rast.value) the CLC grassland shapefile created above at 20m resolution for the large study area (projection LAEA).   
-
-- Merge the two layers of grassland (from CLC(231,321,333) and [Copernicus](https://land.copernicus.eu/pan-european/high-resolution-layers/grassland/status-maps)) (GRASS::r.patch)  
-
-- Clip Grassland layer with the [Inland waterbodies](#waterbodies-and-rivers)    
-
-- Clip Grassland layer with the [Bare Rock layer](#bare-rocks)  
-
-- Clip Grassland with [forest layer](#tree-cover-density)    
-
-From visualization in QGis, some TCD >50% were inside grassland areas. In order to compute a grassland that represents very open areas I decided to exclude cells that are TCD>0 from grassland layer.    
-As such, with the final layer of grassland proportion, those areas inside a grassland but with tcd>0 would be represented as a high proportion of grassland but with a very little distance to forest. It should be particular areas as it represent areas where domestic animals can graze but where there is some trees, thus making areas where probability of attacks could be high.    
-Please see script.  
- 
-## Shrub and transitional woodland-shrub area    
-
-- Select Shrub category (322, 323, 324) in the [CLC 2012 shapefile](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012)  
-```  
-"code_12"  = '324' OR
-"code_12"  = '323' OR
-"code_12" ='322'
-```   
-- Rasterize (GRASS::v.to.rast.value) the shrubland shapefile at 20m resolution for the large study area (LAEA projection) (please see script)   
-- Clip (exclude) [forest layer](#tree-cover-density) from the shrub raster (please see script) to create the transitional area  
-- Clip (exclude) [Grassland](#grassland) to create true transitional area  
-
-=> Creation of the shrubland layer    
 
 ## Patch density as a fragmentation index  
 
